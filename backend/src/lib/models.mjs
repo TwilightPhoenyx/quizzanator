@@ -43,20 +43,6 @@ const Test = db.define('Test', {
 });
 
 const Vote = db.define('Vote', {
-    UserId:{
-        type:DataTypes.INTEGER,
-        references:{
-            model: User,
-            key: 'id'
-        }
-    },
-    TestId:{
-        type:DataTypes.INTEGER,
-        references:{
-            model: Test,
-            key: 'id'
-        }
-    },
     IsVoted: {
         type: DataTypes.BOOLEAN
     },
@@ -66,7 +52,7 @@ const Vote = db.define('Vote', {
 });
 
 const Question = db.define('Question', {
-    Text: {
+    QuestionText: {
         type: DataTypes.STRING
     },
     Timer: {
@@ -75,13 +61,13 @@ const Question = db.define('Question', {
     OptionalImageURL: {
         type: DataTypes.STRING
     },
-    NumberOfQuestions: {
+    NumberOfAnswers: {
         type: DataTypes.INTEGER
     },
 });
 
 const Answer = db.define('Answer', {
-    Text: {
+    AnswerText: {
         type: DataTypes.STRING
     },
     IsCorrect: {
@@ -98,8 +84,8 @@ const Tag = db.define('Tag', {
 User.hasMany(Test)
 Test.belongsTo(User)
 
-User.belongsToMany(Test, {through: Vote, foreignKey: 'UserId' })
-Test.belongsToMany(User, {through: Vote, foreignKey: 'TestId' })
+User.belongsToMany(Test, {through: Vote})
+Test.belongsToMany(User, {through: Vote})
 
 Test.hasMany(Question)
 Question.belongsTo(Test)
