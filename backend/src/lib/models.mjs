@@ -87,10 +87,10 @@ Test.belongsTo(User)
 User.belongsToMany(Test, {through: Vote})
 Test.belongsToMany(User, {through: Vote})
 
-Test.hasMany(Question)
+Test.hasMany(Question, {onDelete:'CASCADE'})
 Question.belongsTo(Test)
 
-Question.hasMany(Answer)
+Question.hasMany(Answer, {onDelete: 'CASCADE'})
 Answer.belongsTo(Question)
 
 Test.belongsToMany(Tag, {through: "TestTag"})

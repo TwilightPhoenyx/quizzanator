@@ -6,6 +6,8 @@ import {
     controllerLoadTests,
     controllerNewTest,
     controllerNewQuestion,
+    controllerUpdateQuestion,
+    controllerDeleteQuestion,
     controllerLoadQuestions,
     controllerUpdateTest
 } from "./lib/controllers.mjs"
@@ -22,8 +24,10 @@ app.get("/test/",  controllerLoadTests)
 app.get("/test/:id/question/",  controllerLoadQuestions)
 
 app.put("/test/:id/", controllerUpdateTest)
+app.put("/question/:id/", controllerUpdateQuestion)
 
-app.delete("/test/", controllerDeleteTest)
+app.delete("/test/:id/", controllerDeleteTest)
+app.delete("/question/:id/", controllerDeleteQuestion)
 
 /*
     app.get("/test/:id",  (pet, resp)=>{

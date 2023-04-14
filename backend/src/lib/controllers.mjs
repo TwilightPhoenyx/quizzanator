@@ -37,7 +37,7 @@ async function controllerUpdateTest(request, response) {
 
 async function controllerDeleteTest(request, response) {
     try {
-        const testToDelete = await Test.findByPk(request.body.id)
+        const testToDelete = await Test.findByPk(request.params.id)
         await testToDelete.destroy()
         response.status(200).send("Ok")
     } catch (exception) {
@@ -60,6 +60,35 @@ async function controllerNewQuestion(request, response) {
     }
 }
 
+async function controllerUpdateQuestion(request, response) {
+    try {
+        const questionId = await Question.findByPk(request.params.id)
+        if ( ! questionId ) return response.status(404).send()
+        const allAnswers = request.body.Answers
+        await questionId.update(request.body)
+        const oldAnswers = await questionId.getAnswers() //Cargamos las respuestas antiguas
+        questionId.removeAnswer(oldAnswers)
+
+        oldAnswers.forEach(oldAnswer => oldAnswer.destroy())
+        allAnswers.forEach(newAnswer => questionId.createAnswer(newAnswer))
+
+        response.send("Ok!")
+    } catch (exception) {
+        exceptionHandler(exception, response)
+    }
+}
+
+async function controllerDeleteQuestion(request, response) {
+    try {
+        const questionToDelete = await Question.findByPk(request.params.id)
+        await questionToDelete.destroy()
+        response.status(200).send("Ok")
+    } catch (exception) {
+        exceptionHandler(exception, response)
+    }
+}
+
+
 async function controllerLoadQuestions(request, response) {
     try {
         response.json(await Question.findByPk(request.query.id))
@@ -75,6 +104,8 @@ export {
     controllerLoadTests,
     controllerDeleteTest,
     controllerNewQuestion,
+    controllerUpdateQuestion,
+    controllerDeleteQuestion,
     controllerLoadQuestions,
     controllerUpdateTest
 }
