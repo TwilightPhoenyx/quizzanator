@@ -6,77 +6,87 @@ const db = new Sequelize({
 });
 
 const User = db.define('User', {
-    Username: {
+    username: {
         type: DataTypes.STRING,
         unique: true
     },
-    PasswordFootprint: {
+    passwordFootprint: {
         type: DataTypes.STRING
     },
-    ProfilePictureURL: {
+    profilePictureURL: {
         type: DataTypes.STRING
     },
-    Email: {
+    email: {
         type: DataTypes.STRING
     }
 });
 
 const Test = db.define('Test', {
-    Title: {
+    title: {
         type: DataTypes.STRING
     },
-    NumberLikes: {
-        type: DataTypes.INTEGER
+    numberOfLikes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
-    NumberDislikes: {
-        type: DataTypes.INTEGER
+    numberOfDislikes: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
-    TimesCompleted: {
-        type: DataTypes.INTEGER
+    timesCompleted: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
-    AverageScore: {
-        type: DataTypes.INTEGER
+    averageScore: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
     },
-    IsPublished: {
-        type: DataTypes.BOOLEAN
+    isPublished: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 });
 
 const Vote = db.define('Vote', {
-    IsVoted: {
+    isVoted: {
         type: DataTypes.BOOLEAN
     },
-    IsLiked: {
+    isLiked: {
         type: DataTypes.BOOLEAN
     }
 });
 
 const Question = db.define('Question', {
-    QuestionText: {
+    questionText: {
         type: DataTypes.STRING
     },
-    Timer: {
+    timer: {
         type: DataTypes.INTEGER
     },
-    OptionalImageURL: {
+    optionalImageURL: {
         type: DataTypes.STRING
     },
-    NumberOfAnswers: {
+    numberOfAnswers: {
         type: DataTypes.INTEGER
     },
 });
 
 const Answer = db.define('Answer', {
-    AnswerText: {
+    answerText: {
         type: DataTypes.STRING
     },
-    IsCorrect: {
+    isCorrect: {
         type: DataTypes.BOOLEAN
     },
 });
 
 const Tag = db.define('Tag', {
-    TagName: {
+    tagName: {
         type: DataTypes.STRING
     }
 });
