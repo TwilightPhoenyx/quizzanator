@@ -1,19 +1,17 @@
+import TestInfo from "./TestInfo";
 
 function LoadTests ({loadedTests, updateDataFunction}){
 
     return(
-        <>
-            <h2>Listado de Tests</h2>
-            {loadedTests.map( test=> <p key={test.id}>
-                                    {test.title} / 
-                                    {test.averageScore}% / 
-                                    {test.numberOfLikes}👍 /
-                                    {test.numberOfDislikes}👎 /
-                                    {test.timesCompleted} veces hecho
-                                    </p>
-            )}
-        </>
-    )
+        <ol>Listado de Test
+        {loadedTests.map(
+            test=><li key={test.id}>
+                <TestInfo testData={test} updateDataFunction={updateDataFunction}/>
+            </li>
+            )
+        }
+        </ol>
+    );
 
 }
 
