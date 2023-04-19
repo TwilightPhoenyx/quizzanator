@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { fetchNewTest } from "../lib/fetch.mjs";
+import { fetchNewTest } from "../lib/fetch/fetchTest.mjs";
 
 function CreateTest({updateDataFunction}) {
 
@@ -20,7 +20,7 @@ function CreateTest({updateDataFunction}) {
     function handlerClickSumbmit(){
         fetchNewTest(
             {title},
-            handlerResponse()
+            handlerResponse
         ) 
     };
 

@@ -1,8 +1,10 @@
-import { pathAPITest } from "./config.mjs"
-import handlerExceptions from "./handlerExceptions.mjs"
+import { pathAPITest } from "../config.mjs"
+import handlerExceptions from "../handlerExceptions.mjs"
 
 const baseUrl = window.location.hostname === "localhost" ? "http://localhost:8000" : ""
 
+
+//POST
 
 async function fetchNewTest(testData, handlerResponse=()=>{}) {
     try {
@@ -23,6 +25,9 @@ async function fetchNewTest(testData, handlerResponse=()=>{}) {
     }
 };
 
+
+//GET
+
 async function fetchLoadTests(handlerData=()=>{}) {
     try {
         const response = await fetch(baseUrl+pathAPITest)
@@ -37,7 +42,33 @@ async function fetchLoadTests(handlerData=()=>{}) {
     }
 };
 
+
+//DELETE
+
+async function fetchDeleteTest(testId, handlerResponse=()=>{}) {
+    try {
+        const response = await fetch(
+            baseUrl+pathAPITest+testId,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+            )
+        if (response.ok) {
+            handlerResponse(response)
+        } else {
+            alert("No se pudo borrar el elemento. Inténtelo más tarde")
+        }
+    } catch (exception) {
+        handlerExceptions(exception)
+    }
+};
+
+
 export {
     fetchLoadTests,
-    fetchNewTest
+    fetchNewTest,
+    fetchDeleteTest
 };
