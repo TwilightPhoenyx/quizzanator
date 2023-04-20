@@ -1,12 +1,13 @@
 import TestInfo from "../components/TestInfo.jsx"
 
-function TestListView ({loadedTests, updateDataFunction}){
+function TestListView ({loadedTests}){
+
 
     return(
         <ul>Listado de Test
         {loadedTests.map(
             test=><li key={test.id}>
-                <TestInfo testData={test} updateDataFunction={updateDataFunction}/>
+                <TestInfo testData={test}/>
             </li>
             )
         }

@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { Context } from "../services/ContextComponent.jsx";
 import { useNavigate } from "react-router-dom";
 import { fetchNewTest } from "../lib/fetch/fetchTest.mjs";
 
-function CreateTest({updateDataFunction}) {
+function CreateTest() {
 
+    const { updateData } = useContext(Context)
     const navigate = useNavigate();
 
     const [title, setTitle] = useState("")
@@ -29,7 +32,7 @@ function CreateTest({updateDataFunction}) {
     };
 
     function handlerResponse(response) {
-        updateDataFunction()
+        updateData()
         navigate("/test_list")
     };
 

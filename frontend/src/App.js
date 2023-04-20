@@ -1,6 +1,7 @@
 import { Link, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { fetchLoadTests } from "./lib/fetch/fetchTest.mjs"
+import { ContextComponent } from './services/ContextComponent.jsx';
 
 import CreateTestView from "./views/CreateTestView.jsx";
 import TestListView from "./views/TestListView.jsx";
@@ -15,12 +16,8 @@ function App() {
     );
       
     function updateData(){
-      fetchLoadTests(handlerData)
-    };
-
-    function handlerData(data) {
-        setTests(data)
-    };
+      fetchLoadTests(setTests)
+    }; 
 
     return (
       <>
@@ -29,21 +26,24 @@ function App() {
             <Link to={"/test_list"}><button>Lista de Tests</button></Link>
         </nav>
 
+        <ContextComponent contextValue={{updateData}}> 
 
-        <Routes>
-            <Route 
-              path='/test_creation' 
-              element={
-                <CreateTestView updateDataFunction={updateData}/>
-              }
-            />
-            <Route 
-              path='/test_list' 
-              element={
-                <TestListView loadedTests={tests} updateDataFunction={updateData}/>
-              }
-            />
-        </Routes>
+          <Routes>
+              <Route 
+                path='/test_creation' 
+                element={
+                  <CreateTestView/>
+                }
+              />
+              <Route 
+                path='/test_list' 
+                element={
+                  <TestListView loadedTests={tests}/>
+                }
+              />
+          </Routes>
+
+        </ContextComponent>
       </>
     )
     

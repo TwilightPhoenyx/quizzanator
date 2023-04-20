@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { Context } from "../services/ContextComponent.jsx";
+
 import { fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
 
-function TestInfo({testData, updateDataFunction}){
+function TestInfo({testData}){
+
+    const { updateData } = useContext(Context) //Tomamos el sólo updateData del objeto guadrado en Context
 
     const [likePercentage, setLikePercentage] = useState()
     const timesLiked = testData.numberOfLikes
@@ -21,8 +26,7 @@ function TestInfo({testData, updateDataFunction}){
     };
 
     function handlerResponse(response) {
-        updateDataFunction()
-        console.log("borrado")
+        updateData()
     };
 
 
