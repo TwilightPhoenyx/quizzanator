@@ -1,6 +1,6 @@
-import TestInfo from "./TestInfo";
+import TestInfo from "../components/TestInfo.jsx"
 
-function LoadTests ({loadedTests, updateDataFunction}){
+function TestListView ({loadedTests, updateDataFunction}){
 
     return(
         <ul>Listado de Test
@@ -15,5 +15,5 @@ function LoadTests ({loadedTests, updateDataFunction}){
 
 }
 
-export default LoadTests
+export default TestListView
 

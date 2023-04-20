@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 
+import { pathAPIVersion } from "./lib/config.mjs";
+
 import { 
     controllerLoadTests,
     controllerNewTest,
@@ -21,17 +23,17 @@ app.use(cors())
 app.use(express.json())
 
 
-app.post("/test/", controllerNewTest)
-app.post("/test/:id/question/", controllerNewQuestion)
+app.post(pathAPIVersion + "/test/", controllerNewTest)
+app.post(pathAPIVersion + "/test/:id/question/", controllerNewQuestion)
 
-app.get("/test/",  controllerLoadTests) // /test/ o /test/?id=xx donde xx es el DI del test especifico
-app.get("/test/:id/question/",  controllerLoadQuestions)
+app.get(pathAPIVersion + "/test/",  controllerLoadTests) /* /test/ o /test/?id=xx donde xx es el id de un test */
+app.get(pathAPIVersion + "/test/:id/question/",  controllerLoadQuestions)
 
-app.put("/test/:id/", controllerUpdateTest)
-app.put("/question/:id/", controllerUpdateQuestion)
+app.put(pathAPIVersion + "/test/:id/", controllerUpdateTest)
+app.put(pathAPIVersion + "/question/:id/", controllerUpdateQuestion)
 
-app.delete("/test/:id/", controllerDeleteTest)
-app.delete("/question/:id/", controllerDeleteQuestion)
+app.delete(pathAPIVersion + "/test/:id/", controllerDeleteTest)
+app.delete(pathAPIVersion + "/question/:id/", controllerDeleteQuestion)
 
 
 app.listen(8000, ()=>{
