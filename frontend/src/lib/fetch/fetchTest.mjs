@@ -19,7 +19,12 @@ async function fetchNewTest(testData, handlerResponse=()=>{}) {
                 body: testDataJSON
             }
         )
-        handlerResponse(response)
+        if (response.ok) {
+            const data = await response.json()
+            handlerResponse(data)
+        } else {
+            alert("No se pudo crear el elemento. Inténtelo más tarde")
+        }
     } catch (exception) {
         handlerExceptions(exception)
     }

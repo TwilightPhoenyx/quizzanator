@@ -11,6 +11,7 @@ async function controllerNewTest(request, response) {
     try {
         const newTest = await Test.create(request.body)
         response.status(201).send(newTest.toJSON())
+        //response.status(201).send(newTest.id)
     } catch (exception) {
         exceptionHandler(exception, response)
     }

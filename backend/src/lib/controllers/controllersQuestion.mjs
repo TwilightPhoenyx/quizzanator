@@ -17,6 +17,7 @@ async function controllerNewQuestion(request, response) {
         const allAnswers = request.body.answers  //Tomamos el array con las respuestas
 
         allAnswers.forEach(answer => questionId.createAnswer(answer));
+        response.status(201)
         response.send("Ok!")
     } catch (exception) {
         exceptionHandler(exception, response)

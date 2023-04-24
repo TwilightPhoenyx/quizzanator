@@ -5,10 +5,12 @@ import { ContextComponent } from './services/ContextComponent.jsx';
 
 import CreateTestView from "./views/CreateTestView.jsx";
 import TestListView from "./views/TestListView.jsx";
+import CreateQuestionView from './views/CreateQuestionView.jsx';
 
 function App() {
 
     const [tests, setTests] = useState([])
+    const [TestId, setTestId] = useState(null)
 
     useEffect(
             updateData,
@@ -26,13 +28,26 @@ function App() {
             <Link to={"/test_list"}><button>Lista de Tests</button></Link>
         </nav>
 
-        <ContextComponent contextValue={{updateData}}> 
+        <ContextComponent contextValue={
+            {
+              updateData,
+              TestId,
+              setTestId
+            }
+          }
+          > 
 
           <Routes>
               <Route 
                 path='/test_creation' 
                 element={
                   <CreateTestView/>
+                }
+              />
+               <Route 
+                path='/test_creation/question_creation' 
+                element={
+                  <CreateQuestionView/>
                 }
               />
               <Route 
