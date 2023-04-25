@@ -27,14 +27,26 @@ async function controllerNewQuestion(request, response) {
 
 //GET
 
-async function controllerLoadQuestions(request, response) {     
-    try {
-        response.json(await Question.findByPk(request.query.id))
-    } catch (exception) {
-        exceptionHandler(exception, response)
+async function controllerLoadQuestions(request, response) {
+    if (request.query.id) {
+        try {
+            const question = await Question.findByPk(request.query.id)
+            response.status(200)
+            response.send(question.toJSON()) 
+        } catch (error) {
+            exceptionHandler(exception, response)
+        }
+    } else {
+        try {
+            const testId = await Test.findByPk(request.params.id)
+            response.status(200)
+            response.json(await testId.getQuestions())
+        } catch (exception) {
+            exceptionHandler(exception, response)
+        }
     }
-};
 
+};
 
 //PUT
 

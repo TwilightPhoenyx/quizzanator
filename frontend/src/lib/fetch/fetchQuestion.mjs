@@ -29,6 +29,26 @@ async function fetchNewQuestion(TestId, questionData, handlerResponse=()=>{}) {
     }
 };
 
+
+//GET
+
+async function fetchLoadQuestion(TestId, handlerData=()=>{}) {
+    try {
+        const response = await fetch(
+            baseUrl + pathAPIVersion + pathAPITest + TestId + pathAPIQuestion
+            )
+        if (response.ok) {
+            const data = await response.json()
+            handlerData(data)
+        } else {
+            alert("No se pudo obtener los elementos. Intentélo más tarde.")
+        }
+    } catch (exception) {
+        handlerExceptions(exception)
+    }
+};
+
 export {
-    fetchNewQuestion
+    fetchNewQuestion,
+    fetchLoadQuestion
 };

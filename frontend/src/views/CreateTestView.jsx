@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useEffect, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
+
 import { fetchNewTest } from "../lib/fetch/fetchTest.mjs";
+import { fetchLoadQuestion } from "../lib/fetch/fetchQuestion.mjs";
 
 import InputText from "../components/InputText.jsx";
+
+
+
 
 function CreateTest() {
 
@@ -15,6 +18,7 @@ function CreateTest() {
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
     const [title, setTitle] = useState("");
     const [titleTextboxValue, setTitleTextboxValue] = useState("Nuevo Test");
+    const [questions, setQuestions] = useState([]);
 
 
     useEffect(
@@ -29,7 +33,7 @@ function CreateTest() {
             if (TestId === null && isNotFirstRender === true) {
                 autoCreateTest()
             } else {
-                console.log(TestId)
+                TestId !== null && loadQuestions()
             }
         },
         [isNotFirstRender]
@@ -43,21 +47,16 @@ function CreateTest() {
     );
 
 
-    /*
-    function handlerClickSumbmit(){
-        fetchNewTest(
-            { title },
-            handlerResponse
-        ) 
-    };
-    */
-
     function autoCreateTest(){
         fetchNewTest(
             { title },
             handlerResponse
         ) 
     };
+
+    function loadQuestions(){
+        fetchLoadQuestion(TestId, setQuestions)
+    }
 
     function handlerResponse(response) {
         setTestId (response.id)
@@ -71,6 +70,16 @@ function CreateTest() {
                 <label>Introduce título de nuevo Test</label>
                 <InputText value={titleTextboxValue} valueSetter={setTitleTextboxValue}/>
                 <Link to={"/test_creation/question_creation"}><button>Añadir pregunta</button></Link>
+
+                <ol>Lista de preguntas
+                    {questions.map(
+                        question=><li key={question.id}>
+                            <p>{question.questionText}</p>
+                        </li>
+                        )
+                    }
+                </ol>
+
             </div>
             {
             //<button onClick={handlerClickSumbmit}>Subir</button>}

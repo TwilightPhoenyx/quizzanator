@@ -2,6 +2,9 @@ import { useState, useEffect} from "react";
 
 import InputText from "./InputText";
 
+
+
+
 function Answer({id, allAnswers}){
 
     const [answers, setAnswers] = allAnswers

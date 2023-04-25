@@ -106,7 +106,8 @@ Answer.belongsTo(Question)
 Test.belongsToMany(Tag, {through: "TestTag"})
 Tag.belongsToMany(Test, {through: "TestTag"})
 
-await db.sync({ alter: true })
+//await db.sync({ alter: true })
+await db.sync()
 
 export {
     User,
