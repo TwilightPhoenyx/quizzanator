@@ -1,7 +1,6 @@
-import { pathAPIVersion, pathAPITest } from "../config.mjs"
+import { baseUrl, pathAPIVersion, pathAPITest } from "../config.mjs"
 import handlerExceptions from "../handlerExceptions.mjs"
 
-const baseUrl = window.location.hostname === "localhost" ? "http://localhost:8000" : ""
 
 
 //POST
@@ -50,10 +49,10 @@ async function fetchLoadTests(handlerData=()=>{}) {
 
 //DELETE
 
-async function fetchDeleteTest(testId, handlerResponse=()=>{}) {
+async function fetchDeleteTest(TestId, handlerResponse=()=>{}) {
     try {
         const response = await fetch(
-            baseUrl + pathAPIVersion + pathAPITest + testId,
+            baseUrl + pathAPIVersion + pathAPITest + TestId,
             {
                 method: "DELETE",
                 headers: {

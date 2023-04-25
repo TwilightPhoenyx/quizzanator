@@ -18,7 +18,7 @@ async function controllerNewQuestion(request, response) {
 
         allAnswers.forEach(answer => questionId.createAnswer(answer));
         response.status(201)
-        response.send("Ok!")
+        response.status(201).send(newQuestion.toJSON())
     } catch (exception) {
         exceptionHandler(exception, response)
     }

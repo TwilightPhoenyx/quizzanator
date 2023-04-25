@@ -5,6 +5,8 @@ import { useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 import { fetchNewTest } from "../lib/fetch/fetchTest.mjs";
 
+import InputText from "../components/InputText.jsx";
+
 function CreateTest() {
 
     const { updateData, TestId, setTestId } = useContext(Context)
@@ -12,7 +14,7 @@ function CreateTest() {
 
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
     const [title, setTitle] = useState("");
-    const [inputTestTitleValue, setInputTestTitleValue] = useState("Nuevo Test");
+    const [titleTextboxValue, setTitleTextboxValue] = useState("Nuevo Test");
 
 
     useEffect(
@@ -35,15 +37,11 @@ function CreateTest() {
 
     useEffect(
         ()=>{ 
-            setTitle(inputTestTitleValue)
+            setTitle(titleTextboxValue)
         },
-        [inputTestTitleValue]
+        [titleTextboxValue]
     );
 
-
-    function handlerInputTestTitle(event){
-        setInputTestTitleValue(event.target.value)
-    };
 
     /*
     function handlerClickSumbmit(){
@@ -71,7 +69,7 @@ function CreateTest() {
         <>
             <div>
                 <label>Introduce título de nuevo Test</label>
-                <input onInput={handlerInputTestTitle} type="text" defaultValue={inputTestTitleValue}/>
+                <InputText value={titleTextboxValue} valueSetter={setTitleTextboxValue}/>
                 <Link to={"/test_creation/question_creation"}><button>Añadir pregunta</button></Link>
             </div>
             {
