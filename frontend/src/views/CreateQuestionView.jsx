@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
@@ -9,18 +9,23 @@ import InputText from "../components/InputText.jsx";
 import Answer from "../components/Answer.jsx";
 
 
+function CreateQuestionView({TestId}) {
 
 
-function CreateQuestionView() {
-
-    const { updateData, TestId } = useContext(Context);
+    const { loadData } = useContext(Context);
     const navigate = useNavigate();
+    const location = useLocation();
+    const stateQuestion = useState("Nueva pregunta");
+    const stateTimer = useState(0);
+    const stateNumberOfAnswers = useState(2);
 
-    const [questionText, setquestionText] = useState("Nueva pregunta");
-    const [timer, setTimer] = useState(0);
-    const [numberOfAnswers, setNumberOfAnswers] = useState(2);
+    const [questionText, setQuestionText] = stateQuestion;
+    const [timer, setTimer] = stateTimer;
+    const [numberOfAnswers, setNumberOfAnswers] = stateNumberOfAnswers;
     const [answers, setAnswers] = useState([]);
     const oldAnswers = []
+
+    //location.state?.QuestionId === undefined && console.log("good")
 
     useEffect(
         ()=>{
@@ -35,7 +40,7 @@ function CreateQuestionView() {
                     <span>Respuesta {counter+1}</span><input type="checkbox"></input>
                     </div>*/
                     //const answerData = {answerText: "Respuesa", isCorrect: false}
-                    console.log(newAnswer)
+                    //console.log(newAnswer)
                     counter++
                     
                 }
@@ -54,8 +59,8 @@ function CreateQuestionView() {
     };
 
     function handlerResponse(response) {
-        updateData()
-        console.log(response)
+        loadData()
+        //console.log(response)
         navigate("/test_creation")
         //navigate("/test_list")
     };
@@ -69,21 +74,19 @@ function CreateQuestionView() {
     return(
         <>
             <div>
-                <InputText value={questionText} valueSetter={setquestionText}/>
+                <InputText stateValue={stateQuestion}/>
             </div>
             <InputNumber 
                 text="Nº de respuestas"
                 minValue="2" 
                 maxValue="4" 
-                number={numberOfAnswers} 
-                numberSetter={setNumberOfAnswers}
+                stateNumber={stateNumberOfAnswers}
             />
             <InputNumber
                 text="Temporizador" 
                 minValue="0" 
                 maxValue="120" 
-                number={timer} 
-                numberSetter={setTimer}
+                stateNumber={stateTimer}
             />
             <p>Aqui se editan las preguntas del test con Id:{TestId}</p>
             {
@@ -97,6 +100,7 @@ function CreateQuestionView() {
                 )
             }
             <button onClick={handlerClickConfirm}>Confirmar</button>
+            <Link to={"/test_creation"}><button>Cancelar</button></Link>
         </>
     )
 

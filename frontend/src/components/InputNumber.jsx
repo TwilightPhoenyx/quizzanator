@@ -1,5 +1,6 @@
-function InputNumber({text, minValue, maxValue, number, numberSetter}) {
-
+function InputNumber({text, minValue, maxValue, stateNumber}) {
+    const [number, setNumber] = stateNumber
+    
     function handlerInputValue(event){
         const savedValue = number
 
@@ -9,7 +10,7 @@ function InputNumber({text, minValue, maxValue, number, numberSetter}) {
             event.target.value <= Number(maxValue)
             ) 
                 {
-                    numberSetter(event.target.value);
+                    setNumber(event.target.value);
                 } 
         else {
                 event.target.value = savedValue;
@@ -26,7 +27,7 @@ function InputNumber({text, minValue, maxValue, number, numberSetter}) {
                 type="number"
                 min={minValue}
                 max={maxValue}
-                defaultValue={number}
+                value={number}
             />
         </label>
 

@@ -32,14 +32,14 @@ async function fetchNewQuestion(TestId, questionData, handlerResponse=()=>{}) {
 
 //GET
 
-async function fetchLoadQuestion(TestId, handlerData=()=>{}) {
+async function fetchLoadQuestion(TestId, handlerResponse=()=>{}) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + pathAPITest + TestId + pathAPIQuestion
             )
         if (response.ok) {
             const data = await response.json()
-            handlerData(data)
+            handlerResponse(data)
         } else {
             alert("No se pudo obtener los elementos. Intentélo más tarde.")
         }

@@ -1,11 +1,12 @@
-function InputText ({value, valueSetter}){
+function InputText ({stateValue}){
+    const [value, setValue] = stateValue
 
     function handlerInputText(event){
-        valueSetter(event.target.value)
+        setValue(event.target.value)
     };
 
     return(
-        <input onInput={handlerInputText} type="text" defaultValue={value}/>
+        <input onInput={handlerInputText} type="text" value={value}/>
     );
 
 };

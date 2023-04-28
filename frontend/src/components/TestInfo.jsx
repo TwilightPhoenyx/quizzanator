@@ -8,12 +8,12 @@ import { fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
 
 function TestInfo({testData}){
 
-    const { updateData } = useContext(Context) //Tomamos el sólo updateData del objeto guadrado en Context
+    const { loadData } = useContext(Context) //Tomamos el sólo loadData del objeto guadrado en Context
 
     const [likePercentage, setLikePercentage] = useState()
     const timesLiked = testData.numberOfLikes
     const timesDisliked = testData.numberOfDislikes
-    const testId = testData.id
+    const TestId = testData.id
 
     useEffect(
         calculateLikePercentage,
@@ -22,13 +22,13 @@ function TestInfo({testData}){
 
     function handlerClickDelete(){
         fetchDeleteTest(
-            testId,
+            TestId,
             handlerResponse
         )
     };
 
     function handlerResponse(response) {
-        updateData()
+        loadData()
     };
 
 
