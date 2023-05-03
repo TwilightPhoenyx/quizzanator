@@ -13,12 +13,14 @@ function Answer({id, allAnswers}){
     const [answerText, setAnswerText] = stateAnswers
     const [isCorrect, setIsCorrect] = useState (newAnswers[id].isCorrect)
 
+    console.log("este es el array", answers)
+
     useEffect(
         ()=>{ 
             newAnswers[id].answerText = answerText;
             newAnswers[id].isCorrect = isCorrect;
             setAnswers(newAnswers);
-            //console.log("este es el array", answers)
+            
         },
         [answerText, isCorrect]
     );
@@ -33,7 +35,7 @@ function Answer({id, allAnswers}){
     return(
         <div>
             <InputText stateValue={stateAnswers}/>
-            <input type="checkbox" onClick={handlerClickIsCorrect} defaultValue={isCorrect}></input>
+            <input type="checkbox" onClick={handlerClickIsCorrect} defaultChecked={isCorrect}></input>
         </div>
     )
 

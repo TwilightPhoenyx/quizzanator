@@ -1,6 +1,7 @@
 import { 
     Test,
-    Question
+    Question,
+    Answer
 } from "../models.mjs";
 
 import exceptionHandler from "../exceptionHandler.mjs";
@@ -48,6 +49,18 @@ async function controllerLoadQuestions(request, response) {
 
 };
 
+    async function controllerLoadAnswers(request, response) {
+        try {
+            const questionId = await Question.findByPk(request.params.id)
+            response.status(200)
+            response.json(await questionId.getAnswers())
+        } catch (error) {
+            exceptionHandler(exception, response)
+        }
+    };
+
+
+
 //PUT
 
 async function controllerUpdateQuestion(request, response) {
@@ -60,7 +73,7 @@ async function controllerUpdateQuestion(request, response) {
         questionId.removeAnswer(oldAnswers)
 
         oldAnswers.forEach(oldAnswer => oldAnswer.destroy())
-        allAnswers.forEach(newAnswer => questionId.createAnswer(newAnswer))
+        allAnswers.forEach(newAnswer => questionId.createAnswer({...newAnswer, id: null}))
 
         response.send("Ok!")
     } catch (exception) {
@@ -85,6 +98,7 @@ async function controllerDeleteQuestion(request, response) {
 export {
     controllerNewQuestion,
     controllerLoadQuestions,
+    controllerLoadAnswers,
     controllerUpdateQuestion,
     controllerDeleteQuestion,
 };

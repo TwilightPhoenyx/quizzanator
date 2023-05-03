@@ -13,6 +13,7 @@ import {
 import { 
     controllerNewQuestion,
     controllerLoadQuestions,
+    controllerLoadAnswers,
     controllerUpdateQuestion,
     controllerDeleteQuestion
 } from "./lib/controllers/controllersQuestion.mjs";
@@ -28,12 +29,13 @@ app.post(pathAPIVersion + "/test/:id/question/", controllerNewQuestion)
 
 app.get(pathAPIVersion + "/test/",  controllerLoadTests) /* /test/ o /test/?id=xx donde xx es el id de un test */
 app.get(pathAPIVersion + "/test/:id/question/",  controllerLoadQuestions)
+app.get(pathAPIVersion + "/question/:id/answer/", controllerLoadAnswers)
 
-app.put(pathAPIVersion + "/test/:id/", controllerUpdateTest)
-app.put(pathAPIVersion + "/question/:id/", controllerUpdateQuestion)
+app.put(pathAPIVersion + "/test/:id", controllerUpdateTest)
+app.put(pathAPIVersion + "/question/:id", controllerUpdateQuestion)
 
-app.delete(pathAPIVersion + "/test/:id/", controllerDeleteTest)
-app.delete(pathAPIVersion + "/question/:id/", controllerDeleteQuestion)
+app.delete(pathAPIVersion + "/test/:id", controllerDeleteTest)
+app.delete(pathAPIVersion + "/question/:id", controllerDeleteQuestion)
 
 
 app.listen(8000, ()=>{

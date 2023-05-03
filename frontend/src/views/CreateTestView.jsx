@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
@@ -10,13 +10,14 @@ import InputText from "../components/InputText.jsx";
 import QuestionInfo from "../components/QuestionInfo.jsx";
 
 
-function CreateTestView({stateTestId}) {
+function CreateTestView() {
 
     const { loadData } = useContext(Context)
     const navigate = useNavigate();
+    const params = useParams();
     const stateTitle = useState("Nuevo Test");
 
-    const [TestId, setTestId] = stateTestId;
+    const [TestId, setTestId] = useState(params.testId)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
     const [title, setTitle] = stateTitle;
     const [questions, setQuestions] = useState([]);
@@ -30,17 +31,17 @@ function CreateTestView({stateTestId}) {
 
     useEffect(
         ()=>{ 
-            if (TestId === null && isNotFirstRender === true) {
+            if (!TestId && isNotFirstRender === true) {
                 fetchNewTest(
                     { title },
                     handlerResponseNewTest
                 )
-            } else if (TestId !== null) {
+            } else if (!!TestId) {
                 fetchLoadTests(
                     (queryOptionalParamId + TestId),
                     handlerResponseLoadTest
                 )
-                fetchLoadQuestion(TestId, setQuestions)
+                fetchLoadQuestion("", TestId, setQuestions)
             }
         },
         [isNotFirstRender]
@@ -49,12 +50,12 @@ function CreateTestView({stateTestId}) {
     function handlerClickSumbmit(){
         updateTest()
         setTitle(null)
-        navigate("/test_list")
+        navigate("/test_list/")
     };
 
     function handlerGoToCreateQuestion(){
         updateTest()
-        navigate("/test_creation/question_creation")
+        navigate("/test_creation/"+ TestId +"/question_creation")
     };
 
     function handlerResponseLoadTest(response) {
@@ -97,7 +98,7 @@ function CreateTestView({stateTestId}) {
                 <ol>Lista de preguntas
                     {questions.map(
                         question=><li key={question.id}>
-                            <QuestionInfo questionData={question}/>
+                            <QuestionInfo TestId={TestId} questionData={question}/>
                         </li>
                         )
                     }

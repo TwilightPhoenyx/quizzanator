@@ -12,10 +12,8 @@ import CreateQuestionView from './views/CreateQuestionView.jsx';
 function App() {
 
     const navigate = useNavigate();
-    const stateTestId = useState(null);
 
     const [tests, setTests] = useState([]);
-    const [TestId, setTestId] = stateTestId;
 
     useEffect(
             loadData,
@@ -23,8 +21,8 @@ function App() {
     );
 
     function handlerGoToCreateTest(){
-      navigate("/test_creation");
-      setTestId(null);
+      navigate("/test_creation/");
+
     };
       
     function loadData(){
@@ -53,19 +51,19 @@ function App() {
               }
             />
             <Route 
-              path='/test_creation' 
+              path='/test_creation/:testId?' 
               element={
-                <CreateTestView stateTestId={stateTestId}/>
+                <CreateTestView/>
               }
             />
               <Route 
-              path='/test_creation/question_creation' 
+              path='/test_creation/:testId/question_creation/:questionId?' 
               element={
-                <CreateQuestionView TestId={TestId}/>
+                <CreateQuestionView/>
               }
             />
             <Route 
-              path='/test_list' 
+              path='/test_list/' 
               element={
                 <TestListView loadedTests={tests}/>
               }
