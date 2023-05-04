@@ -12,7 +12,6 @@ import Answer from "../components/Answer.jsx";
 
 function QuestionView() {
 
-
     const { loadData } = useContext(Context);
     const navigate = useNavigate();
     const params = useParams();
@@ -53,13 +52,6 @@ function QuestionView() {
         },
         [isNotFirstRender]
     );
-
-
-    console.log(
-        "Id Pregunta:", QuestionId,
-        "Respuestas viejas:", oldAnswers,
-        "Respuestas Nuevas", answers
-    )
 
     useEffect(
         ()=>{

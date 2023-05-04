@@ -25,7 +25,6 @@ function Answer({id, allAnswers}){
         [answerText, isCorrect]
     );
 
-    /*console.log(answerText, isCorrect)*/
 
     function handlerClickIsCorrect(){
         setIsCorrect(!isCorrect)

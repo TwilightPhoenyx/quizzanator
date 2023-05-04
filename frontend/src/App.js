@@ -8,6 +8,7 @@ import LayoutView from './views/LayoutView.jsx';
 import CreateTestView from "./views/CreateTestView.jsx";
 import TestListView from "./views/TestListView.jsx";
 import CreateQuestionView from './views/CreateQuestionView.jsx';
+import TakeTestView from './views/TakeTestView.jsx';
 
 function App() {
 
@@ -66,6 +67,12 @@ function App() {
               path='/test_list/' 
               element={
                 <TestListView loadedTests={tests}/>
+              }
+            />
+            <Route 
+              path='/take_a_test/:testId/:testTitle' 
+              element={
+                <TakeTestView/>
               }
             />
           </Routes>

@@ -1,4 +1,5 @@
 import { useEffect, useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../services/ContextComponent.jsx";
 
 import { fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
@@ -45,13 +46,15 @@ function TestInfo({testData}){
     };
 
     return(
-        <p>
-            {testData.title} / 
-            👍{likePercentage}% /
-            Nota Media: {testData.averageScore}% / 
-            {testData.timesCompleted} veces hecho
+        <div>
+                <Link to={"/take_a_test/" + TestId + "/" + testData.title}>
+                    {testData.title} / 
+                    👍{likePercentage}% /
+                    Nota Media: {testData.averageScore}% / 
+                    {testData.timesCompleted} veces hecho
+                </Link>
             <button onClick={handlerClickDelete}>Borrar Test</button>
-        </p>
+        </div>
     )
 
 };

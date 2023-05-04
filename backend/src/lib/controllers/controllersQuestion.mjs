@@ -34,14 +34,14 @@ async function controllerLoadQuestions(request, response) {
             const question = await Question.findByPk(request.query.id)
             response.status(200)
             response.send(question.toJSON()) 
-        } catch (error) {
+        } catch (exception) {
             exceptionHandler(exception, response)
         }
     } else {
         try {
-            const testId = await Test.findByPk(request.params.id)
+            const questionsData = await Question.findAll({include: Answer, where: {TestId: request.params.id}})
             response.status(200)
-            response.json(await testId.getQuestions())
+            response.json(questionsData)
         } catch (exception) {
             exceptionHandler(exception, response)
         }
@@ -49,16 +49,15 @@ async function controllerLoadQuestions(request, response) {
 
 };
 
-    async function controllerLoadAnswers(request, response) {
-        try {
-            const questionId = await Question.findByPk(request.params.id)
-            response.status(200)
-            response.json(await questionId.getAnswers())
-        } catch (error) {
-            exceptionHandler(exception, response)
-        }
-    };
-
+async function controllerLoadAnswers(request, response) {
+    try {
+        const questionId = await Question.findByPk(request.params.id)
+        response.status(200)
+        response.json(await questionId.getAnswers())
+    } catch (exception) {
+        exceptionHandler(exception, response)
+    }
+};
 
 
 //PUT
