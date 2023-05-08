@@ -15,18 +15,19 @@ function QuestionView() {
     const { loadData } = useContext(Context);
     const navigate = useNavigate();
     const params = useParams();
-    const stateQuestion = useState("Nueva pregunta");
-    const stateTimer = useState(0);
-    const stateNumberOfAnswers = useState(2);
-    const [renderAnswers, setRenderAnswers] = useState(false)
-
     const TestId = params.testId
     const QuestionId = params.questionId
 
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
+    const [renderAnswers, setRenderAnswers] = useState(false)
+    
+    const stateQuestion = useState("Nueva pregunta");
     const [questionText, setQuestionText] = stateQuestion;
+    const stateTimer = useState(0);
     const [timer, setTimer] = stateTimer;
+    const stateNumberOfAnswers = useState(2);
     const [numberOfAnswers, setNumberOfAnswers] = stateNumberOfAnswers;
+   
     const [answers, setAnswers] = useState([]);
     const [oldAnswers, setOldAnswers] = useState([])
    

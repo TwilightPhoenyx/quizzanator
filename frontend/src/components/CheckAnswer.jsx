@@ -1,10 +1,14 @@
-function CheckAnswer({answerData, setMessage, setIsAnswered}){
+function CheckAnswer({answerData, setMessage, setAuto, stateIsAnswered, stateCorrectAnswers}){
 
+    const [isAnswered, setIsAnswered] = stateIsAnswered; 
+    let [correctAnswers, setCorrectAnswers] = stateCorrectAnswers;
+    
     function handlerClickAnswer(){
         if (answerData.isCorrect === true){
-            setMessage("Correcto!")
+            setMessage("✔️Correcto!")
+            setCorrectAnswers(correctAnswers+1)
         } else {
-            setMessage("Incorrecto...")
+            setMessage("❌Incorrecto...")
         }
         setIsAnswered(true)
     };
@@ -12,7 +16,9 @@ function CheckAnswer({answerData, setMessage, setIsAnswered}){
     return(
         <div>
             <span>{answerData.answerText}</span>
-            <button onClick={handlerClickAnswer} value={answerData.isCorrect}>O</button>
+            {isAnswered === true && <span>{answerData.isCorrect === true ? "✔️" : "❌"}</span>}
+            {isAnswered !== true && <button onClick={handlerClickAnswer}>O</button>}
+            
         </div>
     );
 

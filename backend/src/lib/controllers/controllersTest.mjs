@@ -24,6 +24,7 @@ async function controllerLoadTests(request, response) {
     if (request.query.id) {
         try {
             const test = await Test.findByPk(request.query.id)
+            if ( ! test ) return response.status(404).send() //Si el valor esta vacio devolvemos excepcion
             response.status(200)
             response.send(test.toJSON()) 
         } catch (error) {

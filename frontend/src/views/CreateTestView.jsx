@@ -47,6 +47,14 @@ function CreateTestView() {
         [isNotFirstRender]
     );
 
+    function updateTest(){
+        fetchUpdateTest(
+            TestId,
+            { title },
+            handlerResponse
+        )
+    };
+
     function handlerClickSumbmit(){
         updateTest()
         setTitle(null)
@@ -66,14 +74,6 @@ function CreateTestView() {
     function handlerResponseNewTest(response) {
         setTestId (response.id)
         loadData()
-    };
-
-    function updateTest(){
-        fetchUpdateTest(
-            TestId,
-            { title },
-            handlerResponse
-        )
     };
 
     function handlerClickCancel(){

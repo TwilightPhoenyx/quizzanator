@@ -1,6 +1,4 @@
 import TestInfo from "../components/TestInfo.jsx"
-import { useContext } from "react";
-import { Context } from "../services/ContextComponent.jsx";
 
 function TestListView ({loadedTests}){
 
