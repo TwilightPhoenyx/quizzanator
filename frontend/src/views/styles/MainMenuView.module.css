@@ -1,0 +1,35 @@
+.mainMenu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2rem;
+}
+
+.quizzanatorLogo {
+    border-radius: 2rem;
+    width: 15rem;
+    height: 15rem;
+}
+
+.quizzanatorTitle {
+    width: 25rem;
+    height: 3rem;
+}
+
+.linkToList {
+    text-decoration: none;
+    font-size: 2rem;
+    font-style: italic;
+    font-weight: bold;
+    margin: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    border-radius: 2rem;
+}
+
+.linkToList:hover {
+    background-color: darkblue;
+    color: lightblue
+}
+

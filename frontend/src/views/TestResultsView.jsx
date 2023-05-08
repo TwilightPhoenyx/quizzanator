@@ -31,7 +31,6 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
     useEffect(
         ()=>{
             if (isDataLoaded){
-                console.log(testData.averageScore, testData.timesCompleted)
                 setAverageScore(
                     parseInt(
                         ((testData.averageScore*testData.timesCompleted) + percentageScore)/(testData.timesCompleted+1).toFixed(0)

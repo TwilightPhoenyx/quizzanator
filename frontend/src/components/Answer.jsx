@@ -13,8 +13,6 @@ function Answer({id, allAnswers}){
     const [answerText, setAnswerText] = stateAnswers
     const [isCorrect, setIsCorrect] = useState (newAnswers[id].isCorrect)
 
-    console.log("este es el array", answers)
-
     useEffect(
         ()=>{ 
             newAnswers[id].answerText = answerText;

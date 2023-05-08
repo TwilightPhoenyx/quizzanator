@@ -4,11 +4,13 @@ import { ContextComponent } from './services/ContextComponent.jsx';
 
 import { fetchLoadTests } from "./lib/fetch/fetchTest.mjs";
 
-import LayoutView from './views/LayoutView.jsx';
+import MainMenuView from './views/MainMenuView.jsx';
 import CreateTestView from "./views/CreateTestView.jsx";
 import TestListView from "./views/TestListView.jsx";
 import CreateQuestionView from './views/CreateQuestionView.jsx';
 import TakeTestView from './views/TakeTestView.jsx';
+
+import "./App.css"
 
 function App() {
 
@@ -23,7 +25,10 @@ function App() {
 
     function handlerGoToCreateTest(){
       navigate("/test_creation/");
+    };
 
+    function handlerReturnToMainMenu(){
+      navigate("/");
     };
       
     function loadData(){
@@ -34,50 +39,52 @@ function App() {
       <>
         <nav>
             <button onClick={handlerGoToCreateTest}>Crear Test Nuevo</button>
-            <Link to={"/"}><button>Inicio</button></Link>
+            <button onClick={handlerReturnToMainMenu}>Inicio</button>
         </nav>
-
-        <ContextComponent contextValue={
-            {
-              loadData
+        <main>
+          <ContextComponent contextValue={
+              {
+                loadData
+              }
             }
-          }
-          > 
-
-          <Routes>
-            <Route 
-              path='/' 
-              element={
-                <LayoutView />
-              }
-            />
-            <Route 
-              path='/test_creation/:testId?' 
-              element={
-                <CreateTestView/>
-              }
-            />
+            > 
+            <Routes>
               <Route 
-              path='/test_creation/:testId/question_creation/:questionId?' 
-              element={
-                <CreateQuestionView/>
-              }
-            />
-            <Route 
-              path='/test_list/' 
-              element={
-                <TestListView loadedTests={tests}/>
-              }
-            />
-            <Route 
-              path='/take_a_test/:testId/:testTitle' 
-              element={
-                <TakeTestView/>
-              }
-            />
-          </Routes>
-
-        </ContextComponent>
+                path='/' 
+                element={
+                  <MainMenuView />
+                }
+              />
+              <Route 
+                path='/test_creation/:testId?' 
+                element={
+                  <CreateTestView/>
+                }
+              />
+                <Route 
+                path='/test_creation/:testId/question_creation/:questionId?' 
+                element={
+                  <CreateQuestionView/>
+                }
+              />
+              <Route 
+                path='/test_list/' 
+                element={
+                  <TestListView loadedTests={tests}/>
+                }
+              />
+              <Route 
+                path='/take_a_test/:testId/:testTitle' 
+                element={
+                  <TakeTestView/>
+                }
+              />
+            </Routes>
+          </ContextComponent>
+        </main>
+        <footer>
+          <p>©️ Copyright 2023. </p>
+        </footer>
       </>
     )
     
