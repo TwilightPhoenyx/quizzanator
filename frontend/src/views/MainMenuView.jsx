@@ -11,7 +11,9 @@ function MainMenuView(){
             <div className={styles.mainMenu}>
                 <img className={styles.quizzanatorLogo} src={quizzanatorLogo} alt="Application logo"></img>
                 <img className={styles.quizzanatorTitle} src={quizzanatorTitle} alt="QUIZZANATOR"></img>
-                <Link to={"/test_list"} className={styles.linkToList}>¡Empecemos!</Link>
+                <Link to={"/test_list"} className={styles.linkToList}>
+                    ⮞ <span className={styles.italicText}>¡Empecemos!</span> ⮜
+                </Link>
             </div>
         </>
     );

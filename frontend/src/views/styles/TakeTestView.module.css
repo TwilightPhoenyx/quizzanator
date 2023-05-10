@@ -1,0 +1,39 @@
+.testTitleScreen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.testTitleScreen h1 {
+    background-color: darkblue;
+    color: lightblue;
+    border-radius: 3rem;
+    border-style: solid;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+}
+
+.testTitleScreen button {
+    border: none;
+    border-radius: 3rem;
+    background-color: rgba(19, 26, 97, 0.459);
+    font-size: 1.1rem;
+    font-style: italic;
+    width: 9rem;
+    margin: 0.2rem;
+    text-align: center;
+    &:hover{
+        background-color: rgb(33, 33, 173);
+        color: lightblue;
+    }
+    &:hover span {
+        color: lightblue;
+    }
+}
+
+.testTitleScreen button span {
+    font-style: normal;
+    color: rgba(0, 0, 0, 0);
+}

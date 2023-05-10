@@ -1,0 +1,98 @@
+span {
+    text-align: center;
+    font-family: sans-serif;
+}
+
+p {
+    align-self: center;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+.testListElement {
+    background-color: rgb(33, 33, 173);
+    width: 98%;
+    height: 3rem;
+    border-style: solid;
+    border-width: 0.1rem;
+    border-radius: 0.2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.4rem;
+    margin: 0.5rem;
+}
+
+.listElementData {
+    display: flex;
+    flex-direction: row;
+    justify-self: flex-end;
+    align-items: center;
+}
+
+.testTitleDisplay {
+    text-align: justify;
+    color: lightblue;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    width: 36rem;
+    display:block;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    &:hover {
+        border-radius: 3rem;
+        color: rgb(12, 12, 68);
+        text-shadow: 2px 0 #a8defd, -2px 0 #a8defd, 0 2px #a8defd, 0 -2px #a8defd,
+                   1px 1px #a8defd, -1px -1px #a8defd, 1px -1px #a8defd, -1px 1px #a8defd;
+    }
+}
+
+.icon {
+   height: 1.5rem;
+   width: 1.5rem;
+}
+
+.scoreDisplay {
+    width: 5rem;
+    font-size: 1.4rem;
+    border-radius: 2rem;
+    border-style: solid;
+    border-width: 0.1rem;
+    background: aqua;
+    margin: 0.2rem;
+    padding: 0.2rem;
+    font-weight: bold;
+}
+
+.likesDisplay {
+    color: lightblue;
+    margin-left: 0.2rem;
+    margin-right: 0.2rem;
+    height: 2rem;
+    width: 4.5rem;
+}
+
+.deleteButton {
+    border-style: none;
+    background-color: red;
+    color: white;
+    margin: 0.1rem;
+    &:hover {
+        background-color: rgb(216, 83, 83);
+        color: red;
+    }
+    &:active {
+        background-color: rgb(165, 17, 17);
+    }
+    
+}
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useEffect, useState } from "react";
 
 import { fetchLoadQuestion } from "../lib/fetch/fetchQuestion.mjs";
@@ -6,8 +6,11 @@ import { fetchLoadQuestion } from "../lib/fetch/fetchQuestion.mjs";
 import TakeTestQuestionView from "./TakeTestQuestionView.jsx";
 import TestResultsView from "./TestResultsView.jsx";
 
+import styles from "./styles/TakeTestView.module.css"
+
 function TakeTestView(){
     const params = useParams();
+    const navigate = useNavigate();
 
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
     const [questionsData, setQuestionsData] = useState([]);
@@ -36,25 +39,40 @@ function TakeTestView(){
         setIsTestInProcess(true)
     };
 
+    function handlerClickReturn(){
+        navigate("/test_list/")
+    }
+
     return(
-        <>
+        <div className={styles.testTitleScreen}>
             <h1>{params.testTitle}</h1>
             {
                 isTestInProcess  !== true && isTestFinished !== true &&
-                    <button onClick={handlerClickStartTest}>Empezar</button>
+                    <>
+                        <h2>¿Comenzamos?</h2>
+                        <button onClick={handlerClickStartTest}>
+                            <span>⮞ </span>
+                            ¡Adelante!
+                            <span> ⮜</span>
+                        </button>
+                        <button onClick={handlerClickReturn}>
+                            <span>⮞ </span>
+                                Mejor no
+                            <span> ⮜</span> 
+                        </button>
+                    </>
+                
             }
             {
                 isTestInProcess === true && questionsData.length > 0 && 
-                    <>
-                        <TakeTestQuestionView 
-                            questionData={questionsData[answerIndex]} 
-                            stateIndex={stateAnswerIndex}
-                            stateCorrectAnswers={stateCorrectAnswers}
-                            totalQuestions={questionsData.length}
-                            setIsTestFinished={setIsTestFinished}
-                            setIsTestInProcess={setIsTestInProcess}
-                        />
-                    </>
+                    <TakeTestQuestionView 
+                        questionData={questionsData[answerIndex]} 
+                        stateIndex={stateAnswerIndex}
+                        stateCorrectAnswers={stateCorrectAnswers}
+                        totalQuestions={questionsData.length}
+                        setIsTestFinished={setIsTestFinished}
+                        setIsTestInProcess={setIsTestInProcess}
+                    />       
             }
             {
                 isTestFinished && 
@@ -64,7 +82,7 @@ function TakeTestView(){
                         answerIndex={answerIndex} 
                     />
             }
-        </>
+        </div>
     );
 
 

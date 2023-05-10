@@ -1,4 +1,4 @@
-import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { ContextComponent } from './services/ContextComponent.jsx';
 
@@ -38,8 +38,8 @@ function App() {
     return (
       <>
         <nav>
-            <button onClick={handlerGoToCreateTest}>Crear Test Nuevo</button>
-            <button onClick={handlerReturnToMainMenu}>Inicio</button>
+            <button onClick={handlerGoToCreateTest}>¡Crea tu test!</button>
+            <button onClick={handlerReturnToMainMenu}>Volver a inicio</button>
         </nav>
         <main>
           <ContextComponent contextValue={

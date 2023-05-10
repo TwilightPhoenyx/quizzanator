@@ -20,16 +20,18 @@
 .linkToList {
     text-decoration: none;
     font-size: 2rem;
-    font-style: italic;
     font-weight: bold;
     margin: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
     border-radius: 2rem;
+    &:hover {
+        background-color: rgb(33, 33, 173);
+        color: lightblue;
+    }
 }
 
-.linkToList:hover {
-    background-color: darkblue;
-    color: lightblue
+.italicText {
+    font-style: italic;
 }
 
