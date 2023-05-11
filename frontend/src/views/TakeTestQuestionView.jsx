@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 
 import CheckAnswer from "../components/CheckAnswer";
 
+import styles from "./styles/TakeTestQuestionView.module.css"
+
 function TakeTestQuestionView(
         {
             questionData, 
@@ -64,23 +66,28 @@ function TakeTestQuestionView(
 
     
     return(
-        <div>
+        <div className={styles.questionContainer}>
             <h2>{questionData.questionText}</h2>
-            {timer !== 0 && isAnswered !== true && <p>{timer}</p>}
-            <p>{message}</p>
-            {questionData.Answers.map(
-                answer=> 
-                    <CheckAnswer 
-                        key={answer.id} 
-                        answerData={answer} 
-                        setMessage={setMessage}
-                        setAuto={setAuto} 
-                        stateIsAnswered={stateIsAnswered}
-                        stateCorrectAnswers={stateCorrectAnswers}
-                    />
-                )
-            }
-            {isAnswered && <button onClick={handlerClickNextQuestion}>Siguiente</button>}
+            {/*timer !== 0 &&*/ isAnswered !== true && <p>{timer}</p>}
+            {isAnswered === true && <p>{message}</p>}
+            <div className={styles.answerContainer}>
+                {questionData.Answers.map(
+                    answer=> 
+                        <CheckAnswer 
+                            key={answer.id} 
+                            answerData={answer} 
+                            setMessage={setMessage}
+                            setAuto={setAuto} 
+                            stateIsAnswered={stateIsAnswered}
+                            stateCorrectAnswers={stateCorrectAnswers}
+                        />
+                    )
+                }
+            </div>
+            <button 
+                className={isAnswered ? styles.nextButton : styles.nextButtonDisabled} 
+                onClick={handlerClickNextQuestion}>Siguiente
+            </button>
         </div>
     );
 

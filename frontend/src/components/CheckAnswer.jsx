@@ -1,3 +1,5 @@
+import styles from "./styles/CheckAnswer.module.css"
+
 function CheckAnswer({answerData, setMessage, setAuto, stateIsAnswered, stateCorrectAnswers}){
 
     const [isAnswered, setIsAnswered] = stateIsAnswered; 
@@ -15,10 +17,22 @@ function CheckAnswer({answerData, setMessage, setAuto, stateIsAnswered, stateCor
 
     return(
         <div>
-            <span>{answerData.answerText}</span>
-            {isAnswered === true && <span>{answerData.isCorrect === true ? "✔️" : "❌"}</span>}
-            {isAnswered !== true && <button onClick={handlerClickAnswer}>O</button>}
-            
+            {isAnswered !== true && 
+                <button className={styles.answerButton} onClick={handlerClickAnswer}>
+                    <span>{answerData.answerText}</span>
+                </button>
+            }
+            {isAnswered === true && 
+                <span className={
+                        [
+                            styles.answerDisplay,
+                            answerData.isCorrect === true ? styles.greenBackground : styles.redBackground,
+                        ].join(" ")       
+                    }
+                >
+                    {answerData.answerText}
+                </span>
+            }        
         </div>
     );
 

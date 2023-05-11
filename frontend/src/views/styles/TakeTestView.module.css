@@ -1,10 +1,10 @@
-.testTitleScreen {
+.testScreen {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.testTitleScreen h1 {
+.testScreen h1 {
     background-color: darkblue;
     color: lightblue;
     border-radius: 3rem;
@@ -15,15 +15,18 @@
     padding-bottom: 0.2rem;
 }
 
-.testTitleScreen button {
-    border: none;
+.testScreen button {
     border-radius: 3rem;
-    background-color: rgba(19, 26, 97, 0.459);
-    font-size: 1.1rem;
     font-style: italic;
+    text-align: center;
+}
+
+.titleButton {
+    border: none;
+    font-size: 1.1rem;
+    background-color: rgba(19, 26, 97, 0.459);
     width: 9rem;
     margin: 0.2rem;
-    text-align: center;
     &:hover{
         background-color: rgb(33, 33, 173);
         color: lightblue;
@@ -33,7 +36,7 @@
     }
 }
 
-.testTitleScreen button span {
+.arrowMarkers{
     font-style: normal;
     color: rgba(0, 0, 0, 0);
 }

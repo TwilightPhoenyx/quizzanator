@@ -44,21 +44,21 @@ function TakeTestView(){
     }
 
     return(
-        <div className={styles.testTitleScreen}>
+        <div className={styles.testScreen}>
             <h1>{params.testTitle}</h1>
             {
                 isTestInProcess  !== true && isTestFinished !== true &&
                     <>
                         <h2>¿Comenzamos?</h2>
-                        <button onClick={handlerClickStartTest}>
-                            <span>⮞ </span>
+                        <button className={styles.titleButton} onClick={handlerClickStartTest}>
+                            <span className={styles.arrowMarkers}>⮞ </span>
                             ¡Adelante!
-                            <span> ⮜</span>
+                            <span className={styles.arrowMarkers}> ⮜</span>
                         </button>
-                        <button onClick={handlerClickReturn}>
-                            <span>⮞ </span>
+                        <button className={styles.titleButton} onClick={handlerClickReturn}>
+                            <span className={styles.arrowMarkers}>⮞ </span>
                                 Mejor no
-                            <span> ⮜</span> 
+                            <span className={styles.arrowMarkers}> ⮜</span> 
                         </button>
                     </>
                 

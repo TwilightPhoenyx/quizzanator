@@ -69,11 +69,12 @@ a:link {
 }
 
 .likesDisplay {
+    font-size: 1.2rem;
     color: lightblue;
     margin-left: 0.2rem;
     margin-right: 0.2rem;
     height: 2rem;
-    width: 4.5rem;
+    width: 5rem;
 }
 
 .deleteButton {
