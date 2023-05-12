@@ -1,16 +1,17 @@
 import styles from "./styles/CheckAnswer.module.css"
 
-function CheckAnswer({answerData, setMessage, setAuto, stateIsAnswered, stateCorrectAnswers}){
+function CheckAnswer({answerData, setMessage, stateIsAnswered, setIsGoodAnswer, stateCorrectAnswers}){
 
     const [isAnswered, setIsAnswered] = stateIsAnswered; 
     let [correctAnswers, setCorrectAnswers] = stateCorrectAnswers;
     
     function handlerClickAnswer(){
         if (answerData.isCorrect === true){
-            setMessage("✔️Correcto!")
+            setMessage("✔️Correcto✔️")
+            setIsGoodAnswer(true)
             setCorrectAnswers(correctAnswers+1)
         } else {
-            setMessage("❌Incorrecto...")
+            setMessage("❌Incorrecto❌")
         }
         setIsAnswered(true)
     };
@@ -26,7 +27,7 @@ function CheckAnswer({answerData, setMessage, setAuto, stateIsAnswered, stateCor
                 <span className={
                         [
                             styles.answerDisplay,
-                            answerData.isCorrect === true ? styles.greenBackground : styles.redBackground,
+                            answerData.isCorrect === true ? styles.greenText : styles.redText,
                         ].join(" ")       
                     }
                 >

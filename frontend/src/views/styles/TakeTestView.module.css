@@ -5,14 +5,15 @@
 }
 
 .testScreen h1 {
-    background-color: darkblue;
-    color: lightblue;
-    border-radius: 3rem;
-    border-style: solid;
+    color: darkblue;
+    background-color: rgba(173, 216, 230, 0.664);
     padding-left: 1rem;
     padding-right: 1rem;
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
+    text-transform: uppercase;
+    border-top-style: solid;
+    border-bottom-style: solid;
 }
 
 .testScreen button {

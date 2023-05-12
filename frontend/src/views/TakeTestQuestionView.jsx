@@ -21,6 +21,7 @@ function TakeTestQuestionView(
     const [timer, setTimer] = useState(questionData.timer);
     const stateIsAnswered = useState(false);
     const [isAnswered, setIsAnswered] = stateIsAnswered;
+    const [isGoodAnswer, setIsGoodAnswer] = useState(false)
     const [auto, setAuto] = useState(false);
     
 
@@ -29,6 +30,7 @@ function TakeTestQuestionView(
             setTimer(questionData.timer)
             setIsAnswered(false)
             setMessage("")
+            setIsGoodAnswer(false)
             setAuto(true)
         },
         [answerIndex]
@@ -50,7 +52,7 @@ function TakeTestQuestionView(
             setTimer(0)
             setAuto(false)
             setIsAnswered(true)
-            setMessage("❌Se acabó el tiempo")
+            setMessage("❌Se acabó el tiempo❌")
         }
     };
 
@@ -68,8 +70,16 @@ function TakeTestQuestionView(
     return(
         <div className={styles.questionContainer}>
             <h2>{questionData.questionText}</h2>
-            {/*timer !== 0 &&*/ isAnswered !== true && <p>{timer}</p>}
-            {isAnswered === true && <p>{message}</p>}
+            {isAnswered !== true && 
+                <p className={timer !== 0 ? styles.clockDisplay : styles.clockInvisible}>
+                    {timer}s
+                </p>
+            }
+            {isAnswered === true && 
+                <p className={isGoodAnswer ? styles.messageCorrect : styles.messageIncorrect}>
+                    {message}
+                </p>
+                }
             <div className={styles.answerContainer}>
                 {questionData.Answers.map(
                     answer=> 
@@ -77,16 +87,16 @@ function TakeTestQuestionView(
                             key={answer.id} 
                             answerData={answer} 
                             setMessage={setMessage}
-                            setAuto={setAuto} 
                             stateIsAnswered={stateIsAnswered}
+                            setIsGoodAnswer={setIsGoodAnswer}
                             stateCorrectAnswers={stateCorrectAnswers}
                         />
                     )
                 }
             </div>
             <button 
-                className={isAnswered ? styles.nextButton : styles.nextButtonDisabled} 
-                onClick={handlerClickNextQuestion}>Siguiente
+                className={isAnswered ? styles.nextButton : styles.invisibleButton}
+                onClick={handlerClickNextQuestion}> ⮞⮞ 
             </button>
         </div>
     );

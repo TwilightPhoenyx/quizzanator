@@ -1,41 +1,43 @@
 .answerButton {
     border-radius: 3rem;
-    border: none;
-    background-color: rgba(19, 26, 97, 0.459);
-    color: white;
-    background-color: rgb(33, 33, 173);
+    border-style: solid;
+    border-width: 0.15rem;
+    border-color: lightblue;
+    color: lightblue;
+    background-color: rgba(19, 26, 97);
     font-size: 1.3rem;
     width: 16rem;
     margin: 0.5rem;
     &:hover{
-        border-color: rgb(0, 0, 0);
-        background-color: rgb(189, 109, 34);
-        color: rgb(0, 0, 0);
+        border-color: rgb(221, 149, 42);
+        background-color:rgb(23, 32, 133);
+        color: rgb(221, 149, 42);
     }
     &:hover span {
-        color: rgb(0, 0, 0);
+        color: rgb(221, 149, 42);
     }
 }
 
 .answerDisplay {
     display: inline-block;
+    border-style: solid;
+    border-width: 0.15rem;
     border-radius: 3rem;
     font-size: 1.3rem;
     font-style: italic;
     text-align: center;
-    border-radius: 3rem;
     background-color: rgba(19, 26, 97, 0.459);
     color: white;
     width: 16rem;
     margin: 0.5rem;
 }
 
-.greenBackground {
-    background-color: rgb(19, 196, 78);
-    color: rgb(19, 18, 18);
+.greenText {
+    color: rgb(19, 196, 78);
+    background-color: rgba(19, 26, 97);
 }
 
-.redBackground {
-    background-color: rgb(184, 23, 11);
-    color: white;
+.redText {
+    color: rgb(243, 56, 43);
+    background-color:rgba(19, 26, 97);
 }

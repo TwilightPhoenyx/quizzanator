@@ -4,12 +4,51 @@
     align-items: center;
 }
 
+.questionContainer p {
+    font-size: 1.1rem;
+    text-align: center;
+    border-style: solid;
+    border-radius: 1rem;
+    border-width: 0.15rem;
+    font-family: sans-serif;
+    font-weight: bold;
+    text-align: center;
+    padding-right: 1rem;
+    padding-left: 1rem;
+}
+
+.clockDisplay {
+    background-color: rgb(44, 154, 190);
+    color: rgb(5, 5, 88);
+    width: 4rem;
+}
+
+.clockInvisible {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+    user-select: none;
+    width: 4rem;
+}
+
+.messageCorrect{
+    color: rgb(24, 29, 78);
+    background-color:  rgb(16, 156, 63);
+    min-width: 10rem;
+    max-width: 16rem;
+}
+
+.messageIncorrect {
+    color: rgb(118, 226, 230);
+    background-color: rgb(190, 26, 20);
+    min-width: 10rem;
+    max-width: 16rem;
+}
+
 .answerContainer {
     column-count: 2;
     text-align: center;
     width: 35rem;
     height: 8rem;
-    border-style: solid;
 }
 
 .nextButton {
@@ -27,7 +66,7 @@
     }
 }
 
-.nextButtonDisabled {
+.invisibleButton{
     font-size: 1.1rem;
     width: 9rem;
     margin: 0.4rem;
@@ -37,5 +76,4 @@
     user-select: none;
     background-color: rgba(0, 0, 0, 0);
     color:rgba(0, 0, 0, 0);
-
 }
