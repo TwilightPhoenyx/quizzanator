@@ -5,6 +5,10 @@ import { Context } from "../services/ContextComponent.jsx";
 import { fetchLoadTests, fetchUpdateTest } from "../lib/fetch/fetchTest.mjs";
 import { queryOptionalParamId } from "../lib/config.mjs";
 
+import styles from "./styles/TestResultView.module.css"
+import thumbsUpIcon from "../img/thumbs-up-icon.png"
+import thumbsDownIcon from "../img/thumbs-down-icon.png"
+
 
 function TestResultsView({TestId, correctAnswers, answerIndex}){
 
@@ -82,12 +86,19 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
 
     return(
         <>
-            <p>Test Terminado: {correctAnswers} de {numberOfQuestions}</p>
-            <p>Tu puntuacion: {percentageScore}%</p>
-            <button onClick={handlerClickVote} value="like">👍</button>
-            <button onClick={handlerClickVote} value="dislike">👎</button>
-            <p>{averageScore}</p>
-            {vote !== "none" && <p>¡Gracias por tu opinion!</p>}
+            <h2>Acertaste {correctAnswers} de {numberOfQuestions}</h2>
+            <p className={styles.scoreDisplay}>🗲{percentageScore}%</p>
+            <div className={styles.voteButtonsContainer}>
+                <button className={styles.voteButton} onClick={handlerClickVote} value="like">
+                    <img src={thumbsUpIcon} alt="Icono de Pulgar Arriba"/>
+                </button>
+                <button className={styles.voteButton} onClick={handlerClickVote} value="dislike">
+                    <img src={thumbsDownIcon} alt="Icono de Pulgar Abajo"/>
+                </button>
+            </div>
+            <p className={vote === "none" ? styles.invisibleText : styles.blueText}>
+                ¡Gracias por tu opinion!
+            </p>
             <button onClick={handlerClickReturnToList}>Volver</button>
         </>
     );

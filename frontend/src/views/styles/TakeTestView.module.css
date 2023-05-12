@@ -16,27 +16,6 @@
     border-bottom-style: solid;
 }
 
-.testScreen button {
-    border-radius: 3rem;
-    font-style: italic;
-    text-align: center;
-}
-
-.titleButton {
-    border: none;
-    font-size: 1.1rem;
-    background-color: rgba(19, 26, 97, 0.459);
-    width: 9rem;
-    margin: 0.2rem;
-    &:hover{
-        background-color: rgb(33, 33, 173);
-        color: lightblue;
-    }
-    &:hover span {
-        color: lightblue;
-    }
-}
-
 .arrowMarkers{
     font-style: normal;
     color: rgba(0, 0, 0, 0);

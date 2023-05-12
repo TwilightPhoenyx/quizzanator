@@ -50,12 +50,12 @@ function TakeTestView(){
                 isTestInProcess  !== true && isTestFinished !== true &&
                     <>
                         <h2>¿Comenzamos?</h2>
-                        <button className={styles.titleButton} onClick={handlerClickStartTest}>
+                        <button className={styles.standardButton} onClick={handlerClickStartTest}>
                             <span className={styles.arrowMarkers}>⮞ </span>
                             ¡Adelante!
                             <span className={styles.arrowMarkers}> ⮜</span>
                         </button>
-                        <button className={styles.titleButton} onClick={handlerClickReturn}>
+                        <button className={styles.standardButton} onClick={handlerClickReturn}>
                             <span className={styles.arrowMarkers}>⮞ </span>
                                 Mejor no
                             <span className={styles.arrowMarkers}> ⮜</span> 

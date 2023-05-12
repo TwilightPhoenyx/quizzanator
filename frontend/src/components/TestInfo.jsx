@@ -9,8 +9,6 @@ import thumbsUpIcon from "../img/thumbs-up-icon.png"
 import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 
-
-
 function TestInfo({testData}){
 
     const { loadData } = useContext(Context) //Tomamos el sólo loadData del objeto guadrado en Context
@@ -65,7 +63,7 @@ function TestInfo({testData}){
                     <img 
                         className={styles.icon} 
                         src={likePercentage >= 50 ? thumbsUpIcon : thumbsDownIcon} 
-                        alt="Icono de Pulgar Arriba" 
+                        alt="Icono de Pulgar" 
                     />
                     {likePercentage}%
                 </span>

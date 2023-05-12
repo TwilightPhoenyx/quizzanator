@@ -1,4 +1,3 @@
-
 nav {
     background-color: rgb(0, 135, 227);
     border-top-left-radius: 0.75rem;
@@ -9,13 +8,33 @@ nav {
     width: 100%;
 }
 
+button {
+    border-radius: 3rem;
+    font-family: sans-serif;
+    font-style: italic;
+    text-align: center;
+    border: none;
+    font-size: 1.1rem;
+    background-color: rgba(19, 26, 97, 0.459);
+    width: 9rem;
+    margin: 0.2rem;
+    &:hover{
+        background-color: rgb(33, 33, 173);
+        color: lightblue;
+    }
+    &:hover span {
+        color: lightblue;
+    }
+}
+
 nav button {
+    border-style: inset;
+    border-color: rgb(54, 54, 90);
     margin: 0.7rem;
     border-radius: 1rem;
     border-width: 0.20rem;
     width: 12rem;
     height: 2rem;
-    font-family: sans-serif;
     font-size: 1.1rem;
     background-color: rgb(12, 63, 175);
     color: lightcyan;
@@ -29,10 +48,13 @@ nav button {
     }
 }
 
+
+
+p {
+    font-weight: bold;
+}
+
 main {
-    /*
-    background-color: rgb(118, 162, 245);
-    */
     width: 90%;
 }
 

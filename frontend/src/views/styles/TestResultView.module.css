@@ -1,0 +1,52 @@
+
+.voteButtonsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.scoreDisplay {
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 3.6rem;
+    font-weight: bold; 
+    color:rgb(18, 31, 87);
+    background-color:rgba(173, 216, 230, 0.664);
+    border-radius: 3rem;
+    padding-bottom: 0.3rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    width: 13rem;
+    margin-top: 0;
+    margin: 2rem;
+}
+
+.voteButton{
+    color: rgb(18, 31, 87);
+    background-color: rgb(18, 31, 87);
+    border-style: inset;
+    border-color:rgb(19, 37, 71);
+    margin: 3rem;
+    width: 6rem;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    padding: 0.4rem;
+    &:hover {
+        background-color: rgba(173, 216, 230, 0.712);
+        border-style: solid;
+        color:blue;
+    }
+}
+
+.voteButton img {
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.blueText {
+    color:rgb(18, 31, 87)
+}
+
+.invisibleText {
+    color:rgba(0, 0, 0, 0);
+}
+
