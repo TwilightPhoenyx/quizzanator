@@ -128,7 +128,6 @@ function QuestionView() {
                 maxValue="120" 
                 stateNumber={stateTimer}
             />
-            <p>Aqui se editan las preguntas del test con Id:{TestId}</p>
             {
                 answers.map( 
                     (answer, arrayPosition) => 

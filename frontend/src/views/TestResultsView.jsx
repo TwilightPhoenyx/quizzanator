@@ -58,12 +58,14 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
                 setNumberOfLikes(testData.numberOfLikes)
                 setNumberOfDislikes(testData.numberOfDislikes+1)
             }
+            console.log("Likes:",numberOfLikes, "Dislikes:", numberOfDislikes)
         },
         [vote]
     );
 
     function handlerClickVote(event){
         setVote(event.target.value)
+        console.log("click")
     };
 
     function handlerResponseLoadData(data){
@@ -89,12 +91,30 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
             <h2>Acertaste {correctAnswers} de {numberOfQuestions}</h2>
             <p className={styles.scoreDisplay}>🗲{percentageScore}%</p>
             <div className={styles.voteButtonsContainer}>
-                <button className={styles.voteButton} onClick={handlerClickVote} value="like">
-                    <img src={thumbsUpIcon} alt="Icono de Pulgar Arriba"/>
-                </button>
-                <button className={styles.voteButton} onClick={handlerClickVote} value="dislike">
-                    <img src={thumbsDownIcon} alt="Icono de Pulgar Abajo"/>
-                </button>
+                <input type="image"
+                    className={
+                        [
+                            styles.voteButton,
+                            vote === "like" ? styles.lockedVote : ""
+                        ].join(" ") 
+                    }
+                    img src={thumbsUpIcon} 
+                    alt="Icono de Pulgar Arriba"
+                    onClick={handlerClickVote} 
+                    value="like"
+                />
+                <input type="image" 
+                    className={
+                        [
+                            styles.voteButton,
+                            vote === "dislike" ? styles.lockedVote : ""
+                        ].join(" ") 
+                    }
+                    src={thumbsDownIcon} 
+                    alt="Icono de Pulgar Abajo" 
+                    onClick={handlerClickVote} 
+                    value="dislike" 
+                />
             </div>
             <p className={vote === "none" ? styles.invisibleText : styles.blueText}>
                 ¡Gracias por tu opinion!

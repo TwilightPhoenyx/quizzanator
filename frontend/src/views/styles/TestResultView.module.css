@@ -12,6 +12,8 @@
     color:rgb(18, 31, 87);
     background-color:rgba(173, 216, 230, 0.664);
     border-radius: 3rem;
+    border-style: groove;
+    border-color: rgb(202, 202, 224);
     padding-bottom: 0.3rem;
     padding-left: 0.6rem;
     padding-right: 0.6rem;
@@ -25,15 +27,28 @@
     background-color: rgb(18, 31, 87);
     border-style: inset;
     border-color:rgb(19, 37, 71);
-    margin: 3rem;
-    width: 6rem;
-    margin-bottom: 1.5rem;
-    margin-top: 1.5rem;
-    padding: 0.4rem;
+    border-radius: 3rem;
+    margin: 1.5rem;
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem;
     &:hover {
-        background-color: rgba(173, 216, 230, 0.712);
-        border-style: solid;
-        color:blue;
+        background-color:rgba(173, 216, 230, 0.712);
+    }
+    &:active {
+        background-color:rgba(139, 188, 204, 0.712);
+        border-color:rgb(210, 210, 243);
+    }
+}
+
+.lockedVote {
+    background-color:rgba(173, 216, 230, 0.712);
+    border-color:rgb(210, 210, 243);
+    &:hover {
+        background-color:rgba(173, 216, 230, 0.712);
+        border-color:rgb(210, 210, 243);
     }
 }
 

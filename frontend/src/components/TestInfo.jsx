@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../services/ContextComponent.jsx";
 
 import { fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
@@ -11,29 +11,33 @@ import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 function TestInfo({testData}){
 
-    const { loadData } = useContext(Context) //Tomamos el sólo loadData del objeto guadrado en Context
+    const { loadData } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
+    const navigate = useNavigate();
 
-    const [likePercentage, setLikePercentage] = useState()
-    const timesLiked = testData.numberOfLikes
-    const timesDisliked = testData.numberOfDislikes
-    const TestId = testData.id
+    const [likePercentage, setLikePercentage] = useState();
+    const timesLiked = testData.numberOfLikes;
+    const timesDisliked = testData.numberOfDislikes;
+    const TestId = testData.id;
 
     useEffect(
         calculateLikePercentage,
         []
     );
 
-    function handlerClickDelete(){
+    function handlerClickDeleteTest(){
         fetchDeleteTest(
             TestId,
             handlerResponse
         )
     };
 
-    function handlerResponse(response) {
+    function handlerClickEditTest(){
+        navigate("/test_creation/"+ TestId)
+    }
+
+    function handlerResponse(_) {
         loadData()
     };
-
 
     function calculateLikePercentage(){
         let totalVotes = timesLiked + timesDisliked
@@ -67,7 +71,8 @@ function TestInfo({testData}){
                     />
                     {likePercentage}%
                 </span>
-                <button className={styles.deleteButton} onClick={handlerClickDelete}>✘</button>
+                <button className={styles.deleteButton} onClick={handlerClickDeleteTest}>✘</button>
+                <button className={styles.deleteButton} onClick={handlerClickEditTest}>✎</button>
             </span>
         </span>
     )

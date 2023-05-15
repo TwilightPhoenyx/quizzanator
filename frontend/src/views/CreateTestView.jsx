@@ -1,4 +1,4 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
@@ -31,21 +31,25 @@ function CreateTestView() {
 
     useEffect(
         ()=>{ 
-            if (!TestId && isNotFirstRender === true) {
-                fetchNewTest(
-                    { title },
-                    handlerResponseNewTest
-                )
-            } else if (!!TestId) {
-                fetchLoadTests(
-                    (queryOptionalParamId + TestId),
-                    handlerResponseLoadTest
-                )
-                fetchLoadQuestion("", TestId, setQuestions)
-            }
+            loadTest()
         },
         [isNotFirstRender]
     );
+
+    function loadTest(){
+        if (!TestId && isNotFirstRender === true) {
+            fetchNewTest(
+                { title },
+                handlerResponseNewTest
+            )
+        } else if (!!TestId) {
+            fetchLoadTests(
+                (queryOptionalParamId + TestId),
+                handlerResponseLoadTest
+            )
+            fetchLoadQuestion("", TestId, setQuestions)
+        }
+    };
 
     function updateTest(){
         fetchUpdateTest(
@@ -77,11 +81,12 @@ function CreateTestView() {
     };
 
     function handlerClickCancel(){
-        fetchDeleteTest(
+        /*fetchDeleteTest(
             TestId,
             handlerResponse
         )
-        navigate("/")
+        navigate("/")*/
+        navigate("/test_list/")
     };
 
     function handlerResponse(_){
@@ -91,14 +96,14 @@ function CreateTestView() {
     return(
         <>
             <div>
-                <label>Introduce título de nuevo Test</label>
+                <label>✎</label>
                 <InputText stateValue={stateTitle}/>
                 <button onClick={handlerGoToCreateQuestion}>Añadir pregunta</button>
 
                 <ol>Lista de preguntas
                     {questions.map(
                         question=><li key={question.id}>
-                            <QuestionInfo TestId={TestId} questionData={question}/>
+                            <QuestionInfo TestId={TestId} questionData={question} loadTest={loadTest}/>
                         </li>
                         )
                     }

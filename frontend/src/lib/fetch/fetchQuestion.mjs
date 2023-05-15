@@ -91,9 +91,34 @@ async function fetchUpdateQuestion(QuestionId, questionData, handlerResponse=()=
 };
 
 
+//DELETE
+
+async function fetchDeleteQuestion(QuestionId, handlerResponse=()=>{}) {
+    try {
+        const response = await fetch(
+            baseUrl + pathAPIVersion + pathAPIQuestion + QuestionId,
+            {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            }
+            )
+        if (response.ok) {
+            handlerResponse(response)
+        } else {
+            alert("No se pudo borrar el elemento. Inténtelo más tarde")
+        }
+    } catch (exception) {
+        handlerExceptions(exception)
+    }
+};
+
+
 export {
     fetchNewQuestion,
     fetchLoadQuestion,
     fetchLoadAnswers,
-    fetchUpdateQuestion
+    fetchUpdateQuestion,
+    fetchDeleteQuestion,
 };
