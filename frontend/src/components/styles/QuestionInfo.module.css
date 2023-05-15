@@ -1,0 +1,14 @@
+.flexContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color:rgb(33, 33, 173);
+    color: lightblue;
+    padding: 0.1rem;
+    margin: 0.2rem;
+    &:hover {
+        background-color: rgb(12, 12, 68);
+    }
+}
+
+

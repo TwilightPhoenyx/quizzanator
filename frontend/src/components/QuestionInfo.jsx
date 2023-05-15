@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 
 import { fetchDeleteQuestion } from "../lib/fetch/fetchQuestion.mjs";
 
+import styles from "./styles/QuestionInfo.module.css"
+
 function QuestionInfo({TestId, questionData, loadTest}){
 
     const navigate = useNavigate();
@@ -23,11 +25,13 @@ function QuestionInfo({TestId, questionData, loadTest}){
     };
 
     return(
-        <>
-            <span>{questionData.questionText}</span>
-            <button onClick={handlerClickEditQuestion}>Editar</button>
-            <button onClick={handlerClickDeleteQuestion}>Borrar</button>
-        </>
+        <div className={styles.flexContainer}>
+           {questionData.questionText}
+            <span>
+                <button className="mini-button" onClick={handlerClickEditQuestion}>✎</button>
+                <button className="mini-button" onClick={handlerClickDeleteQuestion}>✘</button>
+            </span>      
+        </div>
     );
 
 };

@@ -6,6 +6,8 @@ import { fetchNewTest, fetchLoadTests, fetchUpdateTest, fetchDeleteTest } from "
 import { fetchLoadQuestion } from "../lib/fetch/fetchQuestion.mjs";
 import { queryOptionalParamId } from "../lib/config.mjs";
 
+import styles from "./styles/CreateTestView.module.css"
+
 import InputText from "../components/InputText.jsx";
 import QuestionInfo from "../components/QuestionInfo.jsx";
 
@@ -96,11 +98,14 @@ function CreateTestView() {
     return(
         <>
             <div>
-                <label>✎</label>
-                <InputText stateValue={stateTitle}/>
-                <button onClick={handlerGoToCreateQuestion}>Añadir pregunta</button>
-
-                <ol>Lista de preguntas
+                <div className={styles.bigText}>
+                    <label>✎</label>
+                    <InputText stateValue={stateTitle}/>
+                </div>
+                <button className={styles.additionButton} onClick={handlerGoToCreateQuestion}>
+                   Nueva Pregunta
+                </button>
+                <ol>
                     {questions.map(
                         question=><li key={question.id}>
                             <QuestionInfo TestId={TestId} questionData={question} loadTest={loadTest}/>

@@ -1,0 +1,10 @@
+.answersContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-style: solid;
+    border-color: rgb(12, 12, 68);
+    background-color: lightblue;
+    width: 90%;
+    height: 6rem;
+}

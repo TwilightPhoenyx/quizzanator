@@ -8,6 +8,7 @@ import { queryOptionalParamId } from "../lib/config.mjs";
 import InputNumber from "../components/InputNumber.jsx";
 import InputText from "../components/InputText.jsx";
 import Answer from "../components/Answer.jsx";
+import styles from "./styles/CreateQuestionView.module.css"
 
 
 function QuestionView() {
@@ -128,16 +129,18 @@ function QuestionView() {
                 maxValue="120" 
                 stateNumber={stateTimer}
             />
-            {
-                answers.map( 
-                    (answer, arrayPosition) => 
-                        <Answer 
-                            key={arrayPosition} 
-                            id={arrayPosition} 
-                            allAnswers={[answers, setAnswers]} 
-                        />
-                )
-            }
+            <div className={styles.answersContainer}>
+                {
+                    answers.map( 
+                        (answer, arrayPosition) => 
+                            <Answer 
+                                key={arrayPosition} 
+                                id={arrayPosition} 
+                                allAnswers={[answers, setAnswers]} 
+                            />
+                    )
+                }
+            </div>
             <button onClick={handlerClickConfirm}>Confirmar</button>
             <Link to={"/test_creation/"+ TestId}><button>Cancelar</button></Link>
         </>

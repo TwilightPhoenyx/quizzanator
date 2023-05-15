@@ -71,8 +71,8 @@ function TestInfo({testData}){
                     />
                     {likePercentage}%
                 </span>
-                <button className={styles.deleteButton} onClick={handlerClickDeleteTest}>✘</button>
-                <button className={styles.deleteButton} onClick={handlerClickEditTest}>✎</button>
+                <button className="mini-button" onClick={handlerClickEditTest}>✎</button>
+                <button className="mini-button" onClick={handlerClickDeleteTest}>✘</button>
             </span>
         </span>
     )
