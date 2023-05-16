@@ -58,14 +58,12 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
                 setNumberOfLikes(testData.numberOfLikes)
                 setNumberOfDislikes(testData.numberOfDislikes+1)
             }
-            console.log("Likes:",numberOfLikes, "Dislikes:", numberOfDislikes)
         },
         [vote]
     );
 
     function handlerClickVote(event){
         setVote(event.target.value)
-        console.log("click")
     };
 
     function handlerResponseLoadData(data){
