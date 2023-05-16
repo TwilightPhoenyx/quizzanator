@@ -113,37 +113,42 @@ function QuestionView() {
     };
 
     return(
-        <>
-            <div>
+        <div className={styles.questionContainer}>
+            <div className={styles.bigText}>
+                <label>✎</label>
                 <InputText stateValue={stateQuestion}/>
             </div>
-            <InputNumber 
-                text="Nº de respuestas"
-                minValue="2" 
-                maxValue="4" 
-                stateNumber={stateNumberOfAnswers}
-            />
-            <InputNumber
-                text="Temporizador" 
-                minValue="0" 
-                maxValue="120" 
-                stateNumber={stateTimer}
-            />
-            <div className={styles.answersContainer}>
-                {
-                    answers.map( 
-                        (answer, arrayPosition) => 
-                            <Answer 
-                                key={arrayPosition} 
-                                id={arrayPosition} 
-                                allAnswers={[answers, setAnswers]} 
-                            />
-                    )
-                }
+            <div className={styles.inputNumberContainer}>
+                <InputNumber 
+                    text="Nº de respuestas"
+                    minValue="2" 
+                    maxValue="4" 
+                    stateNumber={stateNumberOfAnswers}
+                />
+                <InputNumber
+                    text="Temporizador" 
+                    minValue="0" 
+                    maxValue="120" 
+                    stateNumber={stateTimer}
+                />
             </div>
-            <button onClick={handlerClickConfirm}>Confirmar</button>
-            <Link to={"/test_creation/"+ TestId}><button>Cancelar</button></Link>
-        </>
+            <div>
+                <div className={styles.answersContainer}>
+                    {
+                        answers.map( 
+                            (answer, arrayPosition) => 
+                                <Answer 
+                                    key={arrayPosition} 
+                                    id={arrayPosition} 
+                                    allAnswers={[answers, setAnswers]} 
+                                />
+                        )
+                    }
+                </div>
+                <button onClick={handlerClickConfirm}>Confirmar</button>
+                <Link to={"/test_creation/"+ TestId}><button>Cancelar</button></Link>
+            </div>
+        </div>
     )
 
 }

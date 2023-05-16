@@ -1,0 +1,25 @@
+.answerRow {
+    font-size: 1.1rem;
+    color: rgb(12, 12, 68);
+    font-style: italic;
+}
+
+.checkboxLabel {
+    display: inline-block;
+    background-color: rgb(33, 33, 173);
+    padding-top: 0.15rem;
+    padding-left: 0.1rem;
+    padding-right: 0.1rem;
+    width: 4.9rem;
+    color: lightblue;
+    font-style: unset;
+    text-align: center;
+}
+
+.evenRowBackground {
+    background-color: rgb(255, 255, 255);
+}
+
+.oddRowBackground {
+    background-color: lightblue;
+}

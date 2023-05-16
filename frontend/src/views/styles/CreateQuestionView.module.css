@@ -1,10 +1,41 @@
+.questionContainer {
+    align-self: flex-start;
+    display:flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 30rem;
+}
+
+.inputNumberContainer {
+    height: 2rem;
+    width: 30rem;
+    margin: 1rem;
+    margin-left: 0rem;
+    background-color: rgb(33, 33, 173);
+    color: lightblue;
+    border-radius: 0.4rem;
+}
+
+.inputNumberContainer label{
+    font-size: 1.2rem;
+    margin: 1rem;
+}
+
 .answersContainer{
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
+    justify-content: flex-start;
     border-style: solid;
     border-color: rgb(12, 12, 68);
-    background-color: lightblue;
-    width: 90%;
+    background-color: rgba(173, 216, 230, 0.473);
     height: 6rem;
+    width: 50rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.bigText{
+    font-family: sans-serif;
+    font-size: 1.8rem;
+    color: rgb(12, 12, 68);
 }

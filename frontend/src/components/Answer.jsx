@@ -1,6 +1,7 @@
 import { useState, useEffect} from "react";
 
 import InputText from "./InputText";
+import styles from "./styles/Answer.module.css"
 
 
 
@@ -30,9 +31,20 @@ function Answer({id, allAnswers}){
 
 
     return(
-        <div>
+        <div
+            className={
+                [
+                    styles.answerRow,
+                    id % 2 === 0 ? styles.evenRowBackground : styles.oddRowBackground,
+                ].join(" ")      
+            }
+        >
+            <label>✎</label>
             <InputText stateValue={stateAnswers}/>
-            <input type="checkbox" onClick={handlerClickIsCorrect} defaultChecked={isCorrect}></input>
+            <label>
+                <input type="checkbox" onClick={handlerClickIsCorrect} defaultChecked={isCorrect}/>
+                <span className={styles.checkboxLabel}>{isCorrect ? "Correcta" : "Incorrecta"}</span>
+            </label>
         </div>
     )
 

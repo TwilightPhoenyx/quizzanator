@@ -62,9 +62,13 @@ function CreateTestView() {
     };
 
     function handlerClickSumbmit(){
-        updateTest()
-        setTitle(null)
-        navigate("/test_list/")
+        if (title === "") {
+            alert("Pon un título a tu test")
+        } else {
+            updateTest()
+            setTitle(null)
+            navigate("/test_list/")
+        }
     };
 
     function handlerGoToCreateQuestion(){

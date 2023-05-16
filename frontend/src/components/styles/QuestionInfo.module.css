@@ -3,12 +3,16 @@
     flex-direction: row;
     justify-content: space-between;
     background-color:rgb(33, 33, 173);
+    border-radius: 0.3rem;
     color: lightblue;
     padding: 0.1rem;
+    padding-left:0.2rem;
+    padding-right: 0.2rem;
     margin: 0.2rem;
     &:hover {
         background-color: rgb(12, 12, 68);
     }
 }
+
 
 

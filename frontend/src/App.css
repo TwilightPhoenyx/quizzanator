@@ -66,6 +66,23 @@ footer {
     color: white;
 }
 
+input[type="text"] {
+    all: unset;
+    text-align: left;
+    text-overflow: ellipsis;
+    width: 85%;
+}
+
+input[type=number] {
+    text-align: center;
+    font-size: 1rem;
+    width: 3rem;
+    margin: 0.1rem;
+    &::-webkit-inner-spin-button{
+        opacity:1;
+    } 
+}
+
 .mini-button {
     border-style: none;
     background-color: red;
