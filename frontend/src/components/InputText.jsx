@@ -1,4 +1,4 @@
-function InputText ({stateValue}){
+function InputText ({stateValue, maxLength}){
     const [value, setValue] = stateValue
 
     function handlerInputText(event){
@@ -6,7 +6,7 @@ function InputText ({stateValue}){
     };
 
     return(
-        <input onInput={handlerInputText} type="text" value={value}/>
+        <input maxLength={maxLength} onInput={handlerInputText} type="text" value={value}/>
     );
 
 };

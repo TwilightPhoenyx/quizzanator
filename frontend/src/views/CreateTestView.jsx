@@ -104,7 +104,7 @@ function CreateTestView() {
             <div>
                 <div className={styles.bigText}>
                     <label>✎</label>
-                    <InputText stateValue={stateTitle}/>
+                    <InputText stateValue={stateTitle} maxLength="80"/>
                 </div>
                 <button className={styles.additionButton} onClick={handlerGoToCreateQuestion}>
                    Nueva Pregunta

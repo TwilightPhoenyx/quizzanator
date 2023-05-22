@@ -40,7 +40,7 @@ function Answer({id, allAnswers}){
             }
         >
             <label>✎</label>
-            <InputText stateValue={stateAnswers}/>
+            <InputText stateValue={stateAnswers} maxLength="70"/>
             <label>
                 <input type="checkbox" onClick={handlerClickIsCorrect} defaultChecked={isCorrect}/>
                 <span className={styles.checkboxLabel}>{isCorrect ? "Correcta" : "Incorrecta"}</span>

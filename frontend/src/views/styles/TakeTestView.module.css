@@ -6,6 +6,7 @@
 
 .testScreen h1 {
     color: darkblue;
+    font-size: 1.8rem;
     background-color: rgba(173, 216, 230, 0.664);
     padding-left: 1rem;
     padding-right: 1rem;
