@@ -18,6 +18,11 @@ import {
     controllerDeleteQuestion
 } from "./lib/controllers/controllersQuestion.mjs";
 
+import { 
+    controllerNewUser,
+    controllerLogin 
+} from "./lib/controllers/controllersUsers.mjs";
+
 
 const app = express()
 app.use(cors())
@@ -26,6 +31,8 @@ app.use(express.json())
 
 app.post(pathAPIVersion + "/test/", controllerNewTest)
 app.post(pathAPIVersion + "/test/:id/question/", controllerNewQuestion)
+app.post(pathAPIVersion + "/user/", controllerNewUser)
+app.post(pathAPIVersion + "/session/", controllerLogin)
 
 app.get(pathAPIVersion + "/test/",  controllerLoadTests) /* /test/ o /test/?id=xx donde xx es el id de un test */
 app.get(pathAPIVersion + "/test/:id/question/",  controllerLoadQuestions)
@@ -38,6 +45,6 @@ app.delete(pathAPIVersion + "/test/:id", controllerDeleteTest)
 app.delete(pathAPIVersion + "/question/:id", controllerDeleteQuestion)
 
 
-app.listen(8000, ()=>{
+app.listen(process.env.PORT, ()=>{
     console.log("Express working...")
 })
