@@ -96,7 +96,7 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
                             vote === "like" ? styles.lockedVote : ""
                         ].join(" ") 
                     }
-                    img src={thumbsUpIcon} 
+                    src={thumbsUpIcon} 
                     alt="Icono de Pulgar Arriba"
                     onClick={handlerClickVote} 
                     value="like"
