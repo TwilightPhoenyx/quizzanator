@@ -1,4 +1,4 @@
-import { hash } from "bcrypt"
+import { hash, compare } from "bcrypt"
 import jwt from "jsonwebtoken"
 
 import { 
@@ -37,7 +37,7 @@ async function controllerLogin (request, response){
         )
 
         if (authenticated) {
-            const authPass = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
+            const authPass = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET)
             return response.send(authPass)
         }
 
