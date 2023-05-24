@@ -9,6 +9,8 @@ import CreateTestView from "./views/CreateTestView.jsx";
 import TestListView from "./views/TestListView.jsx";
 import CreateQuestionView from './views/CreateQuestionView.jsx';
 import TakeTestView from './views/TakeTestView.jsx';
+import LoginFormView from './views/LoginFormView.jsx';
+import RegisterFormView from './views/RegisterFormView.jsx';
 
 import "./App.css"
 
@@ -17,18 +19,27 @@ function App() {
     const navigate = useNavigate();
 
     const [tests, setTests] = useState([]);
+    const [token, setToken] = useState("")
+    const defalultSessionName = "invitad@"
+    const [sessionName, setSessionName] = useState(defalultSessionName)
 
     useEffect(
             loadData,
         []
     );
 
-    function handlerGoToCreateTest(){
-      navigate("/test_creation/");
-    };
-
     function handlerReturnToMainMenu(){
       navigate("/");
+    };
+
+    function handlerGoToLogIn(){
+      navigate("/login/");
+    };
+
+    function handlerClickLogOut(){
+      setToken("")
+      setSessionName(defalultSessionName)
+      navigate("/")
     };
       
     function loadData(){
@@ -38,13 +49,19 @@ function App() {
     return (
       <>
         <nav>
-            <button onClick={handlerGoToCreateTest}>¡Crea tu test!</button>
-            <button onClick={handlerReturnToMainMenu}>Volver a inicio</button>
+          {(token === "") && <button onClick={handlerGoToLogIn}>Inicia Sesión</button>}
+          {token && <button onClick={handlerClickLogOut}>Cerrar Sesión</button>}
+          <p className="session-name">Hola, {sessionName}</p>
+          <button onClick={handlerReturnToMainMenu}>Volver a inicio</button>
         </nav>
         <main>
           <ContextComponent contextValue={
               {
-                loadData
+                loadData,
+                token,
+                setToken,
+                sessionName,
+                setSessionName
               }
             }
             > 
@@ -77,6 +94,18 @@ function App() {
                 path='/take_a_test/:testId/:testTitle' 
                 element={
                   <TakeTestView/>
+                }
+              />
+              <Route 
+                path='/login/' 
+                element={
+                  <LoginFormView/>
+                }
+              />
+              <Route 
+                path='/sign_up/' 
+                element={
+                  <RegisterFormView/>
                 }
               />
             </Routes>

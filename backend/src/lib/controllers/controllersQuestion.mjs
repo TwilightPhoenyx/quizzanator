@@ -74,7 +74,7 @@ async function controllerUpdateQuestion(request, response) {
         oldAnswers.forEach(oldAnswer => oldAnswer.destroy())
         allAnswers.forEach(newAnswer => questionId.createAnswer({...newAnswer, id: null}))
 
-        response.send("Ok!")
+        response.status(200).send("Ok!")
     } catch (exception) {
         exceptionHandler(exception, response)
     }

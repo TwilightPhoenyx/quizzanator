@@ -7,6 +7,7 @@ import {
     controllerLoadTests,
     controllerNewTest,
     controllerUpdateTest,
+    controllerUpdateTestStats,
     controllerDeleteTest,
 } from "./lib/controllers/controllersTest.mjs";
 
@@ -38,6 +39,7 @@ app.get(pathAPIVersion + "/test/",  controllerLoadTests) /* /test/ o /test/?id=x
 app.get(pathAPIVersion + "/test/:id/question/",  controllerLoadQuestions)
 app.get(pathAPIVersion + "/question/:id/answer/", controllerLoadAnswers)
 
+app.put(pathAPIVersion + "/test/:id/stats/", controllerUpdateTestStats)
 app.put(pathAPIVersion + "/test/:id", controllerUpdateTest)
 app.put(pathAPIVersion + "/question/:id", controllerUpdateQuestion)
 

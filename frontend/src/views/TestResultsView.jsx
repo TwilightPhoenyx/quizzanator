@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
-import { fetchLoadTests, fetchUpdateTest } from "../lib/fetch/fetchTest.mjs";
+import { fetchLoadTests, fetchUpdateTestStats } from "../lib/fetch/fetchTest.mjs";
 import { queryOptionalParamId } from "../lib/config.mjs";
 
 import styles from "./styles/TestResultView.module.css"
@@ -72,7 +72,7 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
     };
 
     function handlerClickReturnToList(){
-        fetchUpdateTest(
+        fetchUpdateTestStats(
             TestId,
             { numberOfLikes, numberOfDislikes, timesCompleted, averageScore },
             handlerResponse

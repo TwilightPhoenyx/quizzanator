@@ -87,11 +87,6 @@ function CreateTestView() {
     };
 
     function handlerClickCancel(){
-        /*fetchDeleteTest(
-            TestId,
-            handlerResponse
-        )
-        navigate("/")*/
         navigate("/test_list/")
     };
 
@@ -104,7 +99,7 @@ function CreateTestView() {
             <div>
                 <div className={styles.bigText}>
                     <label>✎</label>
-                    <InputText stateValue={stateTitle} maxLength="80"/>
+                    <InputText stateValue={stateTitle} type="text" maxLength="80"/>
                 </div>
                 <button className={styles.additionButton} onClick={handlerGoToCreateQuestion}>
                    Nueva Pregunta

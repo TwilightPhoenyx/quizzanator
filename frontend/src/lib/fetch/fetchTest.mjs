@@ -64,7 +64,30 @@ async function fetchUpdateTest(TestId, testData, handlerResponse=()=>{}) {
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo crear el elemento. Inténtelo más tarde")
+            alert("No se pudo actualizar el elemento. Inténtelo más tarde")
+        }
+    } catch (exception) {
+        handlerExceptions(exception)
+    }
+};
+
+async function fetchUpdateTestStats(TestId, testData, handlerResponse=()=>{}) {
+    try {
+        const testDataJSON = JSON.stringify(testData)
+        const response = await fetch(
+            baseUrl + pathAPIVersion + pathAPITest + TestId + "/stats/",
+            {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: testDataJSON
+            }
+        )
+        if (response.ok) {
+            handlerResponse(response)
+        } else {
+            alert("Error al actualizar las estadísticas")
         }
     } catch (exception) {
         handlerExceptions(exception)
@@ -100,5 +123,6 @@ export {
     fetchLoadTests,
     fetchNewTest,
     fetchUpdateTest,
+    fetchUpdateTestStats,
     fetchDeleteTest
 };

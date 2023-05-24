@@ -54,6 +54,24 @@ async function controllerUpdateTest(request, response) {
     }
 };
 
+async function controllerUpdateTestStats(request, response) {
+    try {
+        const test = await Test.findByPk(request.params.id)
+        if ( ! test ) return response.status(404).send() //Si el valor esta vacio devolvemos excepcion
+        await test.update(
+            {
+                averageScore: request.body.averageScore, 
+                timesCompleted: request.body.timesCompleted,
+                numberOfLikes: request.body.numberOfLikes,
+                numberOfDislikes: request.body.numberOfDislikes
+            }
+            )
+        response.send("Ok!")
+    } catch (exception) {
+        exceptionHandler(exception, response)
+    }
+};
+
 
 //DELETE
 
@@ -72,5 +90,6 @@ export {
     controllerNewTest,
     controllerLoadTests,
     controllerUpdateTest,
+    controllerUpdateTestStats,
     controllerDeleteTest
 }

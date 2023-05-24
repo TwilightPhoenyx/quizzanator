@@ -15,8 +15,8 @@ async function controllerNewUser(request, response){
     try {
         const passwordFootprint = await hash(request.body.password, 10)
         const userData = {...request.body, passwordFootprint}
-        const user = await User.create(userData)
-        response.status(201).json(user)
+        await User.create(userData)
+        response.status(201).send("Ok!")
     } catch (exception) {
         exceptionHandler(exception, response)
     }

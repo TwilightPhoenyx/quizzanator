@@ -116,7 +116,7 @@ function QuestionView() {
         <div className={styles.questionContainer}>
             <div className={styles.bigText}>
                 <label>✎</label>
-                <InputText stateValue={stateQuestion} maxLength="100"/>
+                <InputText stateValue={stateQuestion} type="text" maxLength="100"/>
             </div>
             <div className={styles.inputNumberContainer}>
                 <InputNumber 
