@@ -5,7 +5,7 @@ import handlerExceptions from "../handlerExceptions.mjs"
 
 //POST
 
-async function fetchNewTest(testData, handlerResponse=()=>{}) {
+async function fetchNewTest(testData, jwt, handlerResponse=()=>{}) {
     try {
         const testDataJSON = JSON.stringify(testData)
         const response = await fetch(
@@ -13,7 +13,8 @@ async function fetchNewTest(testData, handlerResponse=()=>{}) {
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: "Bearer "+jwt
                 },
                 body: testDataJSON
             }
@@ -22,7 +23,7 @@ async function fetchNewTest(testData, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo crear el elemento. Inténtelo más tarde")
+            alert("No se pudo crear el elemento")
         }
     } catch (exception) {
         handlerExceptions(exception)
@@ -39,7 +40,7 @@ async function fetchLoadTests( optionalId, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo obtener la lista de tests. Intentélo más tarde.")
+            alert("No se pudo obtener la lista de tests")
         }
     } catch (exception) {
         handlerExceptions(exception)
@@ -48,7 +49,7 @@ async function fetchLoadTests( optionalId, handlerResponse=()=>{}) {
 
 //PUT
 
-async function fetchUpdateTest(TestId, testData, handlerResponse=()=>{}) {
+async function fetchUpdateTest(TestId, testData, jwt, handlerResponse=()=>{}) {
     try {
         const testDataJSON = JSON.stringify(testData)
         const response = await fetch(
@@ -56,7 +57,8 @@ async function fetchUpdateTest(TestId, testData, handlerResponse=()=>{}) {
             {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: "Bearer "+jwt
                 },
                 body: testDataJSON
             }
@@ -64,7 +66,7 @@ async function fetchUpdateTest(TestId, testData, handlerResponse=()=>{}) {
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo actualizar el elemento. Inténtelo más tarde")
+            alert("No se pudo actualizar el elemento")
         }
     } catch (exception) {
         handlerExceptions(exception)
@@ -97,21 +99,22 @@ async function fetchUpdateTestStats(TestId, testData, handlerResponse=()=>{}) {
 
 //DELETE
 
-async function fetchDeleteTest(TestId, handlerResponse=()=>{}) {
+async function fetchDeleteTest(TestId, jwt, handlerResponse=()=>{}) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + pathAPITest + TestId,
             {
                 method: "DELETE",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: "Bearer "+jwt
                 }
             }
             )
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo borrar el elemento. Inténtelo más tarde")
+            alert("No se pudo borrar el elemento")
         }
     } catch (exception) {
         handlerExceptions(exception)

@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
 import { fetchNewUser, fetchNewSession } from "../lib/fetch/fetchUser.mjs";
@@ -19,13 +19,6 @@ function RegisterFormView(){
     const stateEmail = useState("");
     const [email, setEmail] = stateEmail
 
-
-    useEffect(
-        ()=>{ 
-            console.log(username, password, email, token)
-        },
-        [username, password, email, token]
-    );
 
     function handlerClickSubmit(){
         fetchNewUser (
@@ -68,6 +61,9 @@ function RegisterFormView(){
                     />
                     <button type="button" onClick={handlerClickSubmit}>Enviar</button>
                 </fieldset>
+                <Link to="/login/">
+                    <span className="link">Si ya tienes cuenta, inicia sesión</span>
+                </Link>
             </form>
         </>
     );

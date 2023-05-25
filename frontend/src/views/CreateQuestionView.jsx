@@ -13,7 +13,7 @@ import styles from "./styles/CreateQuestionView.module.css"
 
 function QuestionView() {
 
-    const { loadData } = useContext(Context);
+    const { loadData, token } = useContext(Context);
     const navigate = useNavigate();
     const params = useParams();
     const TestId = params.testId
@@ -78,12 +78,14 @@ function QuestionView() {
             fetchNewQuestion(
                 TestId,
                 { questionText, timer, numberOfAnswers, answers },
+                token,
                 handlerResponse
             )
         } else {
             fetchUpdateQuestion(
                 QuestionId,
                 { questionText, timer, numberOfAnswers, TestId, answers },
+                token,
                 handlerResponse
             )
         }

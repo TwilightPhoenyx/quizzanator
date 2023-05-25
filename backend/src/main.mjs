@@ -5,6 +5,7 @@ import { pathAPIVersion } from "./lib/config.mjs";
 
 import { 
     controllerLoadTests,
+    controllerLoadUserTests,
     controllerNewTest,
     controllerUpdateTest,
     controllerUpdateTestStats,
@@ -24,27 +25,30 @@ import {
     controllerLogin 
 } from "./lib/controllers/controllersUsers.mjs";
 
+import { middlewareAuthorization } from "./lib/controllers/middleware.mjs";
+
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
 
-app.post(pathAPIVersion + "/test/", controllerNewTest)
-app.post(pathAPIVersion + "/test/:id/question/", controllerNewQuestion)
+app.post(pathAPIVersion + "/test/", middlewareAuthorization, controllerNewTest)
+app.post(pathAPIVersion + "/test/:id/question/", middlewareAuthorization, controllerNewQuestion)
 app.post(pathAPIVersion + "/user/", controllerNewUser)
 app.post(pathAPIVersion + "/session/", controllerLogin)
 
-app.get(pathAPIVersion + "/test/",  controllerLoadTests) /* /test/ o /test/?id=xx donde xx es el id de un test */
+app.get(pathAPIVersion + "/test/", controllerLoadTests) /* /test/ o /test/?id=xx */
 app.get(pathAPIVersion + "/test/:id/question/",  controllerLoadQuestions)
 app.get(pathAPIVersion + "/question/:id/answer/", controllerLoadAnswers)
+app.get(pathAPIVersion + "/user/test/", middlewareAuthorization, controllerLoadUserTests)
 
 app.put(pathAPIVersion + "/test/:id/stats/", controllerUpdateTestStats)
-app.put(pathAPIVersion + "/test/:id", controllerUpdateTest)
-app.put(pathAPIVersion + "/question/:id", controllerUpdateQuestion)
+app.put(pathAPIVersion + "/test/:id", middlewareAuthorization, controllerUpdateTest)
+app.put(pathAPIVersion + "/question/:id", middlewareAuthorization, controllerUpdateQuestion)
 
-app.delete(pathAPIVersion + "/test/:id", controllerDeleteTest)
-app.delete(pathAPIVersion + "/question/:id", controllerDeleteQuestion)
+app.delete(pathAPIVersion + "/test/:id", middlewareAuthorization, controllerDeleteTest)
+app.delete(pathAPIVersion + "/question/:id", middlewareAuthorization, controllerDeleteQuestion)
 
 
 app.listen(process.env.PORT, ()=>{

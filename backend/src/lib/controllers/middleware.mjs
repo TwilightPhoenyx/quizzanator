@@ -6,7 +6,7 @@ function middlewareAuthorization (request, response, next) {
         response.locals.authorization = jwt.verify(token, process.env.JWT_SECRET)
         return next()
     } catch (exception) {
-        resposta.sendStatus(403)
+        response.sendStatus(403)
     }
 }
 

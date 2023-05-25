@@ -19,13 +19,6 @@ function LoginFormView(){
     const [password, setPassword] = statePassword;
 
 
-    useEffect(
-        ()=>{ 
-            console.log(username, password, token)
-        },
-        [username, password, token]
-    );
-
     function handlerClickSubmit(){
         fetchNewSession (
             { username, password },

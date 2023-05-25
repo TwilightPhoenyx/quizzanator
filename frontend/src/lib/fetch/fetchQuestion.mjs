@@ -5,7 +5,7 @@ import handlerExceptions from "../handlerExceptions.mjs"
 
 //POST
 
-async function fetchNewQuestion(TestId, questionData, handlerResponse=()=>{}) {
+async function fetchNewQuestion(TestId, questionData, jwt, handlerResponse=()=>{}) {
     try {
         const questionDataJSON = JSON.stringify(questionData)
         const response = await fetch(
@@ -13,7 +13,8 @@ async function fetchNewQuestion(TestId, questionData, handlerResponse=()=>{}) {
             {
                 method: "POST",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: "Bearer "+jwt
                 },
                 body: questionDataJSON
             }
@@ -22,7 +23,7 @@ async function fetchNewQuestion(TestId, questionData, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo crear el elemento. Inténtelo más tarde")
+            alert("No se pudo crear el elemento")
         }
     } catch (exception) {
         handlerExceptions(exception)
@@ -41,7 +42,7 @@ async function fetchLoadQuestion( optionalId, TestId, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo obtener los elementos. Intentélo más tarde.")
+            alert("No se pudo obtener los elementos")
         }
     } catch (exception) {
         handlerExceptions(exception)
@@ -67,7 +68,7 @@ async function fetchLoadAnswers(QuestionId, handlerResponse=()=>{}) {
 
 //PUT
 
-async function fetchUpdateQuestion(QuestionId, questionData, handlerResponse=()=>{}) {
+async function fetchUpdateQuestion(QuestionId, questionData, jwt, handlerResponse=()=>{}) {
     try {
         const questionDataJSON = JSON.stringify(questionData)
         const response = await fetch(
@@ -75,7 +76,8 @@ async function fetchUpdateQuestion(QuestionId, questionData, handlerResponse=()=
             {
                 method: "PUT",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: "Bearer "+jwt
                 },
                 body: questionDataJSON
             }
@@ -83,7 +85,7 @@ async function fetchUpdateQuestion(QuestionId, questionData, handlerResponse=()=
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo actualizar el elemento. Inténtelo más tarde")
+            alert("No se pudo actualizar el elemento")
         }
     } catch (exception) {
         handlerExceptions(exception)
@@ -93,21 +95,22 @@ async function fetchUpdateQuestion(QuestionId, questionData, handlerResponse=()=
 
 //DELETE
 
-async function fetchDeleteQuestion(QuestionId, handlerResponse=()=>{}) {
+async function fetchDeleteQuestion(QuestionId, jwt, handlerResponse=()=>{}) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + pathAPIQuestion + QuestionId,
             {
                 method: "DELETE",
                 headers: {
-                    "Content-Type": "application/json"
+                    "Content-Type": "application/json",
+                    authorization: "Bearer "+jwt
                 }
             }
             )
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo borrar el elemento. Inténtelo más tarde")
+            alert("No se pudo borrar el elemento")
         }
     } catch (exception) {
         handlerExceptions(exception)

@@ -6,6 +6,7 @@ function exceptionHandler (exception, response) {
             response.status(400).send();
             break;
         default:
+            console.log (exception.name)
             console.error(exception)
             response.status(500).send()
     }

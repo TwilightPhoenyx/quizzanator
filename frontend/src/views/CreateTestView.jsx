@@ -14,7 +14,7 @@ import QuestionInfo from "../components/QuestionInfo.jsx";
 
 function CreateTestView() {
 
-    const { loadData } = useContext(Context)
+    const { loadData, token } = useContext(Context)
     const navigate = useNavigate();
     const params = useParams();
     const stateTitle = useState("Nuevo Test");
@@ -22,6 +22,7 @@ function CreateTestView() {
     const [TestId, setTestId] = useState(params.testId)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
     const [title, setTitle] = stateTitle;
+    const [isPublished, setIsPublished] = useState(false)
     const [questions, setQuestions] = useState([]);
 
     useEffect(
@@ -42,6 +43,7 @@ function CreateTestView() {
         if (!TestId && isNotFirstRender === true) {
             fetchNewTest(
                 { title },
+                token,
                 handlerResponseNewTest
             )
         } else if (!!TestId) {
@@ -56,7 +58,8 @@ function CreateTestView() {
     function updateTest(){
         fetchUpdateTest(
             TestId,
-            { title },
+            { title, isPublished },
+            token,
             handlerResponse
         )
     };
@@ -71,6 +74,15 @@ function CreateTestView() {
         }
     };
 
+    function handlerClickCancel(){
+        navigate("/test_list/")
+    };
+
+    function handlerClickIsPublished(){
+        setIsPublished(!isPublished)
+        console.log(isPublished)
+    }
+
     function handlerGoToCreateQuestion(){
         updateTest()
         navigate("/test_creation/"+ TestId +"/question_creation")
@@ -78,16 +90,14 @@ function CreateTestView() {
 
     function handlerResponseLoadTest(response) {
         setTitle (response.title)
+        setIsPublished(response.isPublished)
+        console.log(response.isPublished)
         loadData()
     };
 
     function handlerResponseNewTest(response) {
         setTestId (response.id)
         loadData()
-    };
-
-    function handlerClickCancel(){
-        navigate("/test_list/")
     };
 
     function handlerResponse(_){
@@ -112,10 +122,13 @@ function CreateTestView() {
                         )
                     }
                 </ol>
-
             </div>
-            <button onClick={handlerClickSumbmit}>Subir</button>
+            <button onClick={handlerClickSumbmit}>Guardar</button>
             <button onClick={handlerClickCancel}>Cancelar</button>
+            <label>
+                <input type="checkbox" onChange={handlerClickIsPublished} checked={isPublished}/>
+                <span>Publicado</span>
+            </label>
         </>
     )
 };

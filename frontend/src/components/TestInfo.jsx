@@ -11,7 +11,7 @@ import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 function TestInfo({testData}){
 
-    const { loadData } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
+    const { loadData, token } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
     const navigate = useNavigate();
 
     const [likePercentage, setLikePercentage] = useState();
@@ -27,6 +27,7 @@ function TestInfo({testData}){
     function handlerClickDeleteTest(){
         fetchDeleteTest(
             TestId,
+            token,
             handlerResponse
         )
     };
@@ -71,8 +72,8 @@ function TestInfo({testData}){
                     />
                     {likePercentage}%
                 </span>
-                <button className="mini-button" onClick={handlerClickEditTest}>✎</button>
-                <button className="mini-button" onClick={handlerClickDeleteTest}>✘</button>
+                {token && <button className="mini-button" onClick={handlerClickEditTest}>✎</button>}
+                {token && <button className="mini-button" onClick={handlerClickDeleteTest}>✘</button>}
             </span>
         </span>
     )
