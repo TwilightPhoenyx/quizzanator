@@ -10,7 +10,7 @@ function TestListView ({loadedTests}){
             <ul>
             {loadedTests.map(
                 test=><li key={test.id}>
-                    <TestInfo testData={test}/>
+                    <TestInfo testData={test} isPublic={true}/>
                 </li>
                 )
             }

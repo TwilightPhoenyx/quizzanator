@@ -23,7 +23,9 @@ async function controllerNewTest(request, response) {
 async function controllerLoadTests(request, response) {
     if (request.query.id) {
         try {
-            const test = await Test.findByPk(request.query.id)
+            const test = await Test.findOne({
+                where: {id: request.query.id}
+            })
             if ( ! test ) return response.status(404).send() //Si el valor esta vacio devolvemos excepcion
             response.status(200)
             response.send(test.toJSON()) 
@@ -33,7 +35,10 @@ async function controllerLoadTests(request, response) {
     } else {
         try {
             response.status(200)
-            response.json(await Test.findAll())
+            response.json(await Test.findAll(
+                {where: {isPublished: true}}
+                )
+            )
         } catch (exception) {
             exceptionHandler(exception, response)
         }
@@ -45,7 +50,7 @@ async function controllerLoadUserTests(request, response) {
     if (request.query.id) {
         try {
             const test = await Test.findOne({
-                where: {id: request.query.id, UserId: response.authorization.locals.id}
+                where: {id: request.query.id, UserId: response.locals.authorization.id}
             })
             response.status(200)
             response.send(test.toJSON()) 
@@ -56,7 +61,7 @@ async function controllerLoadUserTests(request, response) {
         try {
             response.status(200)
             response.json(await Test.findAll(
-                {where: {UserId: response.authorization.locals.id}}
+                {where: {UserId: response.locals.authorization.id}}
                 )
             )
         } catch (exception) {

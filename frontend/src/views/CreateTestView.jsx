@@ -14,7 +14,7 @@ import QuestionInfo from "../components/QuestionInfo.jsx";
 
 function CreateTestView() {
 
-    const { loadData, token } = useContext(Context)
+    const { loadData, token, sessionName } = useContext(Context)
     const navigate = useNavigate();
     const params = useParams();
     const stateTitle = useState("Nuevo Test");
@@ -70,12 +70,12 @@ function CreateTestView() {
         } else {
             updateTest()
             setTitle(null)
-            navigate("/test_list/")
+            navigate("/user/" + sessionName)
         }
     };
 
     function handlerClickCancel(){
-        navigate("/test_list/")
+        navigate("/user/" + sessionName)
     };
 
     function handlerClickIsPublished(){
@@ -123,12 +123,23 @@ function CreateTestView() {
                     }
                 </ol>
             </div>
-            <button onClick={handlerClickSumbmit}>Guardar</button>
-            <button onClick={handlerClickCancel}>Cancelar</button>
-            <label>
-                <input type="checkbox" onChange={handlerClickIsPublished} checked={isPublished}/>
-                <span>Publicado</span>
-            </label>
+            <div className={styles.buttonContainer}>
+                <div>
+                    <button onClick={handlerClickSumbmit}>Guardar</button>
+                    <button onClick={handlerClickCancel}>Cancelar</button>
+                </div>
+                <label
+                    className={
+                        [
+                            styles.checkboxLabel,
+                            isPublished === true ? styles.greenBackground : styles.darkBlueBackground,
+                        ].join(" ")  
+                    }
+                >
+                    <input type="checkbox" onChange={handlerClickIsPublished} checked={isPublished}/>
+                    <span> Publicado</span>
+                </label>
+            </div>
         </>
     )
 };

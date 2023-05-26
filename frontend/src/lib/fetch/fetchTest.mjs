@@ -47,6 +47,27 @@ async function fetchLoadTests( optionalId, handlerResponse=()=>{}) {
     }
 };
 
+async function fetchLoadUserTests( optionalId, jwt, handlerResponse=()=>{}) {
+    try {
+        const response = await fetch(
+            baseUrl + pathAPIVersion + "/user" + pathAPITest + optionalId,
+            {
+                headers: {
+                    authorization: "Bearer "+jwt
+                },
+            }
+        )
+        if (response.ok) {
+            const data = await response.json()
+            handlerResponse(data)
+        } else {
+            alert("No se pudo obtener la lista de tests")
+        }
+    } catch (exception) {
+        handlerExceptions(exception)
+    }
+};
+
 //PUT
 
 async function fetchUpdateTest(TestId, testData, jwt, handlerResponse=()=>{}) {
@@ -124,6 +145,7 @@ async function fetchDeleteTest(TestId, jwt, handlerResponse=()=>{}) {
 
 export {
     fetchLoadTests,
+    fetchLoadUserTests,
     fetchNewTest,
     fetchUpdateTest,
     fetchUpdateTestStats,

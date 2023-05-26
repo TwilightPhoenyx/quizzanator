@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import { ContextComponent } from './services/ContextComponent.jsx';
 
@@ -11,6 +11,7 @@ import CreateQuestionView from './views/CreateQuestionView.jsx';
 import TakeTestView from './views/TakeTestView.jsx';
 import LoginFormView from './views/LoginFormView.jsx';
 import RegisterFormView from './views/RegisterFormView.jsx';
+import UserProfileView from './views/UserProfileView.jsx';
 
 import "./App.css"
 
@@ -19,8 +20,8 @@ function App() {
     const navigate = useNavigate();
 
     const [tests, setTests] = useState([]);
-    const [token, setToken] = useState("")
-    const defalultSessionName = "invitad@"
+    const [token, setToken] = useState("");
+    const defalultSessionName = "invitad@";
     const [sessionName, setSessionName] = useState(defalultSessionName)
 
     useEffect(
@@ -51,7 +52,11 @@ function App() {
         <nav>
           {(token === "") && <button onClick={handlerGoToLogIn}>Inicia Sesión</button>}
           {token && <button onClick={handlerClickLogOut}>Cerrar Sesión</button>}
-          <p className="session-name">Hola, {sessionName}</p>
+          {(token === "") && <p className="session-name">Hola, invitad@</p>}
+          {token && 
+              <Link to={"/user/" + sessionName}>
+                <p className="session-name">Hola, {sessionName}</p>
+              </Link>}
           <button onClick={handlerReturnToMainMenu}>Volver a inicio</button>
         </nav>
         <main>
@@ -78,7 +83,7 @@ function App() {
                   <CreateTestView/>
                 }
               />
-                <Route 
+              <Route 
                 path='/test_creation/:testId/question_creation/:questionId?' 
                 element={
                   <CreateQuestionView/>
@@ -106,6 +111,12 @@ function App() {
                 path='/sign_up/' 
                 element={
                   <RegisterFormView/>
+                }
+              />
+              <Route 
+                path='/user/:username' 
+                element={
+                  <UserProfileView/>
                 }
               />
             </Routes>

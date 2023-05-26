@@ -9,7 +9,7 @@ import thumbsUpIcon from "../img/thumbs-up-icon.png"
 import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 
-function TestInfo({testData}){
+function TestInfo({testData, isPublic}){
 
     const { loadData, token } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
     const navigate = useNavigate();
@@ -53,12 +53,24 @@ function TestInfo({testData}){
     };
 
     return(
-        <span className={styles.testListElement}>
-            <Link to={"/take_a_test/" + TestId + "/" + testData.title} >
+        <span className={
+            [
+                styles.listElementContainer,
+                testData.isPublished === true ? styles.blueBackground : styles.grayBackground,
+            ].join(" ")       
+        }>
+            {isPublic && 
+                <Link to={"/take_a_test/" + TestId + "/" + testData.title} >
+                    <p className={styles.testTitleDisplay}>
+                        ⮞ {testData.title}
+                    </p>
+                </Link>
+            }
+            {isPublic === false && 
                 <p className={styles.testTitleDisplay}>
-                    ⮞ {testData.title}
+                        {testData.title}
                 </p>
-            </Link>
+            }
             <span className={styles.listElementData}>
                 <span>
                     <p className={styles.scoreDisplay}>🗲{testData.averageScore}%</p>
@@ -72,8 +84,8 @@ function TestInfo({testData}){
                     />
                     {likePercentage}%
                 </span>
-                {token && <button className="mini-button" onClick={handlerClickEditTest}>✎</button>}
-                {token && <button className="mini-button" onClick={handlerClickDeleteTest}>✘</button>}
+                {isPublic === false && <button className="mini-button" onClick={handlerClickEditTest}>✎</button>}
+                {isPublic === false && <button className="mini-button" onClick={handlerClickDeleteTest}>✘</button>}
             </span>
         </span>
     )
