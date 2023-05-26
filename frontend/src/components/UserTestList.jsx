@@ -24,7 +24,7 @@ function UserTestList (){
             <ul>
             {loadedTests.map(
                 test=><li key={test.id}>
-                    <TestInfo testData={test} isPublic={false}/>
+                    <TestInfo loadData={loadUserTests} testData={test} isPublic={false}/>
                 </li>
                 )
             }

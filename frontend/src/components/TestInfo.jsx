@@ -9,9 +9,9 @@ import thumbsUpIcon from "../img/thumbs-up-icon.png"
 import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 
-function TestInfo({testData, isPublic}){
+function TestInfo({loadData, testData, isPublic}){
 
-    const { loadData, token } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
+    const { token } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
     const navigate = useNavigate();
 
     const [likePercentage, setLikePercentage] = useState();
