@@ -29,7 +29,6 @@ function RegisterFormView(){
                 handlerResponse,
                 setNotification
             );
-            setUsername("")
         } else {
             setNotification("Confirme correctamente su contraseña")
             setPassword("")
