@@ -12,7 +12,7 @@ import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 function TestResultsView({TestId, correctAnswers, answerIndex}){
 
-    const { loadData } = useContext(Context)
+    const { loadData, setNotification } = useContext(Context)
     const navigate = useNavigate()
     const numberOfQuestions = answerIndex +1;
     const percentageScore = ((correctAnswers/numberOfQuestions)*100);
@@ -27,7 +27,7 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
 
     useEffect(
         ()=>{
-            fetchLoadTests(queryOptionalParamId + TestId, handlerResponseLoadData);
+            fetchLoadTests(queryOptionalParamId + TestId, handlerResponseLoadData, setNotification);
         },
         []
     );
@@ -75,7 +75,8 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
         fetchUpdateTestStats(
             TestId,
             { numberOfLikes, numberOfDislikes, timesCompleted, averageScore },
-            handlerResponse
+            handlerResponse,
+            setNotification
         )
     };
 

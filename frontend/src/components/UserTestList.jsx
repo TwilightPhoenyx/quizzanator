@@ -4,10 +4,12 @@ import TestInfo from "./TestInfo.jsx"
 
 import { fetchLoadUserTests } from "../lib/fetch/fetchTest.mjs";
 
+import styles from "./styles/UserTestList.module.css"
+
 
 function UserTestList (){
 
-    const { token } = useContext(Context);
+    const { token, setNotification } = useContext(Context);
     const [loadedTests, setLoadedTests] = useState([])
 
     useEffect(
@@ -16,7 +18,7 @@ function UserTestList (){
     );
     
     function loadUserTests(){
-        fetchLoadUserTests("", token, setLoadedTests);
+        fetchLoadUserTests("", token, setLoadedTests, setNotification);
     };     
 
     return(

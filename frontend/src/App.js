@@ -1,5 +1,5 @@
 import { Route, Routes, Link, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ContextComponent } from './services/ContextComponent.jsx';
 
 import { fetchLoadTests } from "./lib/fetch/fetchTest.mjs";
@@ -23,11 +23,25 @@ function App() {
     const [token, setToken] = useState("");
     const defalultSessionName = "invitad@";
     const [sessionName, setSessionName] = useState(defalultSessionName)
+    const notificationModal = useRef()
+    let [notification, setNotification] = useState("");
+
+    useEffect(
+          ()=>{
+            if (notification === "") {
+              notificationModal.current.close()
+            } else {
+              notificationModal.current.showModal()
+            }
+          },
+      [notification]
+    );
 
     useEffect(
             loadData,
         []
     );
+
 
     function handlerReturnToMainMenu(){
       navigate("/");
@@ -42,9 +56,13 @@ function App() {
       setSessionName(defalultSessionName)
       navigate("/")
     };
+
+    function handlerClickCloseModal(){
+      setNotification("")
+    };
       
     function loadData(){
-      fetchLoadTests("", setTests);
+      fetchLoadTests("", setTests, setNotification);
     }; 
 
     return (
@@ -66,7 +84,8 @@ function App() {
                 token,
                 setToken,
                 sessionName,
-                setSessionName
+                setSessionName,
+                setNotification
               }
             }
             > 
@@ -121,6 +140,12 @@ function App() {
               />
             </Routes>
           </ContextComponent>
+
+          <dialog ref={notificationModal} id="modal">
+                <span>{notification}</span>
+                <button onClick={handlerClickCloseModal}>Aceptar</button>
+          </dialog>
+
         </main>
         <footer>
           <p>©️ Copyright 2023. </p>

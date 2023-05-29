@@ -9,7 +9,7 @@ import { useContext } from "react";
 function QuestionInfo({TestId, questionData, loadTest}){
 
     const navigate = useNavigate();
-    const { token } = useContext(Context)
+    const { token, setNotification } = useContext(Context)
 
 
     function handlerClickEditQuestion() {
@@ -20,7 +20,8 @@ function QuestionInfo({TestId, questionData, loadTest}){
         fetchDeleteQuestion(
             questionData.id,
             token,
-            handlerResponse
+            handlerResponse,
+            setNotification
         )
     };
 

@@ -5,7 +5,7 @@ import handlerExceptions from "../handlerExceptions.mjs"
 
 //POST
 
-async function fetchNewQuestion(TestId, questionData, jwt, handlerResponse=()=>{}) {
+async function fetchNewQuestion(TestId, questionData, jwt, handlerResponse=()=>{}, notification) {
     try {
         const questionDataJSON = JSON.stringify(questionData)
         const response = await fetch(
@@ -23,17 +23,17 @@ async function fetchNewQuestion(TestId, questionData, jwt, handlerResponse=()=>{
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo crear el elemento")
+            notification("No se pudo crear el elemento")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
 
 //GET
 
-async function fetchLoadQuestion( optionalId, TestId, handlerResponse=()=>{}) {
+async function fetchLoadQuestion( optionalId, TestId, handlerResponse=()=>{}, notification) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + pathAPITest + TestId + pathAPIQuestion + optionalId
@@ -42,14 +42,14 @@ async function fetchLoadQuestion( optionalId, TestId, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo obtener los elementos")
+            notification("No se pudo obtener los elementos")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
-async function fetchLoadAnswers(QuestionId, handlerResponse=()=>{}) {
+async function fetchLoadAnswers(QuestionId, handlerResponse=()=>{}, notification) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + pathAPIQuestion + QuestionId + pathAPIAnswer
@@ -58,17 +58,17 @@ async function fetchLoadAnswers(QuestionId, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo obtener los elementos. Intentélo más tarde.")
+            notification("No se pudo obtener los elementos. Intentélo más tarde.")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
 
 //PUT
 
-async function fetchUpdateQuestion(QuestionId, questionData, jwt, handlerResponse=()=>{}) {
+async function fetchUpdateQuestion(QuestionId, questionData, jwt, handlerResponse=()=>{}, notification) {
     try {
         const questionDataJSON = JSON.stringify(questionData)
         const response = await fetch(
@@ -85,17 +85,17 @@ async function fetchUpdateQuestion(QuestionId, questionData, jwt, handlerRespons
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo actualizar el elemento")
+            notification("No se pudo actualizar el elemento")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
 
 //DELETE
 
-async function fetchDeleteQuestion(QuestionId, jwt, handlerResponse=()=>{}) {
+async function fetchDeleteQuestion(QuestionId, jwt, handlerResponse=()=>{}, notification) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + pathAPIQuestion + QuestionId,
@@ -110,10 +110,10 @@ async function fetchDeleteQuestion(QuestionId, jwt, handlerResponse=()=>{}) {
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo borrar el elemento")
+            notification("No se pudo borrar el elemento")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 

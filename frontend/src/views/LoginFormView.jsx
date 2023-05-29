@@ -10,7 +10,7 @@ import styles from "./styles/Forms.module.css";
 
 function LoginFormView(){
 
-    const { token, setToken, sessionName, setSessionName } = useContext(Context);
+    const { token, setToken, sessionName, setSessionName, setNotification } = useContext(Context);
     const navigate = useNavigate();
 
     const stateUsername = useState("");
@@ -22,14 +22,15 @@ function LoginFormView(){
     function handlerClickSubmit(){
         fetchNewSession (
             { username, password },
-            handlerResponse
+            handlerResponse,
+            setNotification
         );
     };
 
     function handlerResponse(response){
         setToken(response)
         setSessionName(username)
-        alert("Bienvenid@, " + username)
+        setNotification("Bienvenid@, " + username)
         navigate("/")
     };
 

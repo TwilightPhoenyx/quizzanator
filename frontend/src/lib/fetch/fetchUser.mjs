@@ -6,7 +6,7 @@ import handlerExceptions from "../handlerExceptions.mjs"
 //POST
 
 //Sign In
-async function fetchNewUser(userData, handlerResponse=()=>{}) {
+async function fetchNewUser(userData, handlerResponse=()=>{}, notification) {
     try {
         const userDataJSON = JSON.stringify(userData)
         const response = await fetch(
@@ -22,15 +22,20 @@ async function fetchNewUser(userData, handlerResponse=()=>{}) {
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("Error en el registro. Inténtelo más tarde")
+            if (response.status === 400) {
+                notification("El nombre de usuario ya existe")
+            } else {
+                notification("Error al crear la cuenta")
+            }
+            
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
 //Login
-async function fetchNewSession(userData, handlerResponse=()=>{}) {
+async function fetchNewSession(userData, handlerResponse=()=>{}, notification) {
     try {
         const userDataJSON = JSON.stringify(userData)
         const response = await fetch(
@@ -48,10 +53,10 @@ async function fetchNewSession(userData, handlerResponse=()=>{}) {
             handlerResponse(token)
         } else {
             console.log(response)
-            alert("No se pudo iniciar sesión. Compruebe los datos")
+            notification("No se pudo iniciar sesión. Compruebe los datos")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 

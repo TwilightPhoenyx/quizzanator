@@ -13,7 +13,7 @@ import styles from "./styles/CreateQuestionView.module.css"
 
 function QuestionView() {
 
-    const { loadData, token } = useContext(Context);
+    const { loadData, token, setNotification } = useContext(Context);
     const navigate = useNavigate();
     const params = useParams();
     const TestId = params.testId
@@ -46,7 +46,8 @@ function QuestionView() {
                 fetchLoadQuestion(
                     (queryOptionalParamId + QuestionId),
                     TestId,
-                    handlerResponseLoadQuestion
+                    handlerResponseLoadQuestion,
+                    setNotification
                 )
             } else if (!QuestionId) {
                 setRenderAnswers(true)
@@ -79,14 +80,16 @@ function QuestionView() {
                 TestId,
                 { questionText, timer, numberOfAnswers, answers },
                 token,
-                handlerResponse
+                handlerResponse,
+                setNotification
             )
         } else {
             fetchUpdateQuestion(
                 QuestionId,
                 { questionText, timer, numberOfAnswers, TestId, answers },
                 token,
-                handlerResponse
+                handlerResponse,
+                setNotification
             )
         }
     };
@@ -101,7 +104,7 @@ function QuestionView() {
         setTimer(response.timer)
         setNumberOfAnswers(response.numberOfAnswers)
         setQuestionText(response.questionText)
-        fetchLoadAnswers(QuestionId, handlerLoadAnswers)
+        fetchLoadAnswers(QuestionId, handlerLoadAnswers, setNotification)
     };
 
     function handlerLoadAnswers(data){

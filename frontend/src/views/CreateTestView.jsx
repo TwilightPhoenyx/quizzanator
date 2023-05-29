@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
-import { fetchNewTest, fetchLoadTests, fetchUpdateTest, fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
+import { fetchNewTest, fetchLoadTests, fetchUpdateTest } from "../lib/fetch/fetchTest.mjs";
 import { fetchLoadQuestion } from "../lib/fetch/fetchQuestion.mjs";
 import { queryOptionalParamId } from "../lib/config.mjs";
 
@@ -14,7 +14,7 @@ import QuestionInfo from "../components/QuestionInfo.jsx";
 
 function CreateTestView() {
 
-    const { loadData, token, sessionName } = useContext(Context)
+    const { loadData, token, sessionName, setNotification } = useContext(Context)
     const navigate = useNavigate();
     const params = useParams();
     const stateTitle = useState("Nuevo Test");
@@ -44,14 +44,16 @@ function CreateTestView() {
             fetchNewTest(
                 { title },
                 token,
-                handlerResponseNewTest
+                handlerResponseNewTest,
+                setNotification
             )
         } else if (!!TestId) {
             fetchLoadTests(
                 (queryOptionalParamId + TestId),
-                handlerResponseLoadTest
+                handlerResponseLoadTest,
+                setNotification
             )
-            fetchLoadQuestion("", TestId, setQuestions)
+            fetchLoadQuestion("", TestId, setQuestions, setNotification)
         }
     };
 
@@ -60,13 +62,14 @@ function CreateTestView() {
             TestId,
             { title, isPublished },
             token,
-            handlerResponse
+            handlerResponse,
+            setNotification
         )
     };
 
     function handlerClickSumbmit(){
         if (title === "") {
-            alert("Pon un título a tu test")
+            setNotification("Pon un título a tu test")
         } else {
             updateTest()
             setTitle(null)

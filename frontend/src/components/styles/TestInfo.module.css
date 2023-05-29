@@ -42,6 +42,9 @@ a:link {
     overflow:hidden;
     text-overflow:ellipsis;
     white-space: nowrap;
+}
+
+.higlightListLinkHover {
     &:hover {
         border-radius: 3rem;
         color: rgb(12, 12, 68);

@@ -122,7 +122,7 @@ input[type=number] {
     
 }
 
-#username, #password, #email {
+#username, #password, #password-confirmation, #email {
     all: unset;
     background-color: white;
     font-size: 1rem;

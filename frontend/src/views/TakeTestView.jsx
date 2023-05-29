@@ -1,16 +1,18 @@
-import { useParams, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState , useContext } from "react";
+import { Context } from "../services/ContextComponent.jsx";
 
 import { fetchLoadQuestion } from "../lib/fetch/fetchQuestion.mjs";
 
 import TakeTestQuestionView from "./TakeTestQuestionView.jsx";
 import TestResultsView from "./TestResultsView.jsx";
 
-import styles from "./styles/TakeTestView.module.css"
+import styles from "./styles/TakeTestView.module.css";
 
 function TakeTestView(){
     const params = useParams();
     const navigate = useNavigate();
+    const { setNotification } = useContext(Context)
 
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
     const [questionsData, setQuestionsData] = useState([]);
@@ -30,7 +32,7 @@ function TakeTestView(){
 
     useEffect(
         ()=>{ 
-            fetchLoadQuestion("", params.testId, setQuestionsData)
+            fetchLoadQuestion("", params.testId, setQuestionsData, setNotification)
         },
         [isNotFirstRender]
     );

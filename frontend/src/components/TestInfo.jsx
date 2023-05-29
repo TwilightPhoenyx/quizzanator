@@ -11,13 +11,14 @@ import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 function TestInfo({loadData, testData, isPublic}){
 
-    const { token } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
+    const { token, setNotification } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
     const navigate = useNavigate();
 
     const [likePercentage, setLikePercentage] = useState();
     const timesLiked = testData.numberOfLikes;
     const timesDisliked = testData.numberOfDislikes;
     const TestId = testData.id;
+    const UserId = testData.UserId;
 
     useEffect(
         calculateLikePercentage,
@@ -28,7 +29,8 @@ function TestInfo({loadData, testData, isPublic}){
         fetchDeleteTest(
             TestId,
             token,
-            handlerResponse
+            handlerResponse,
+            setNotification
         )
     };
 
@@ -61,7 +63,12 @@ function TestInfo({loadData, testData, isPublic}){
         }>
             {isPublic && 
                 <Link to={"/take_a_test/" + TestId + "/" + testData.title} >
-                    <p className={styles.testTitleDisplay}>
+                    <p className={
+                        [
+                            styles.testTitleDisplay,
+                            styles.higlightListLinkHover
+                        ].join(" ")
+                    }>
                         ⮞ {testData.title}
                     </p>
                 </Link>

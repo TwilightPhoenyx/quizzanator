@@ -5,7 +5,7 @@ import handlerExceptions from "../handlerExceptions.mjs"
 
 //POST
 
-async function fetchNewTest(testData, jwt, handlerResponse=()=>{}) {
+async function fetchNewTest(testData, jwt, handlerResponse=()=>{}, notification) {
     try {
         const testDataJSON = JSON.stringify(testData)
         const response = await fetch(
@@ -23,31 +23,31 @@ async function fetchNewTest(testData, jwt, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo crear el elemento")
+            notification("No se pudo crear el elemento")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
 
 //GET
 
-async function fetchLoadTests( optionalId, handlerResponse=()=>{}) {
+async function fetchLoadTests( optionalId, handlerResponse=()=>{}, notification) {
     try {
         const response = await fetch(baseUrl + pathAPIVersion + pathAPITest + optionalId)
         if (response.ok) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo obtener la lista de tests")
+            notification("No se pudo obtener la lista de tests")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
-async function fetchLoadUserTests( optionalId, jwt, handlerResponse=()=>{}) {
+async function fetchLoadUserTests( optionalId, jwt, handlerResponse=()=>{}, notification) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + "/user" + pathAPITest + optionalId,
@@ -61,16 +61,16 @@ async function fetchLoadUserTests( optionalId, jwt, handlerResponse=()=>{}) {
             const data = await response.json()
             handlerResponse(data)
         } else {
-            alert("No se pudo obtener la lista de tests")
+            notification("No se pudo obtener la lista de tests")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
 //PUT
 
-async function fetchUpdateTest(TestId, testData, jwt, handlerResponse=()=>{}) {
+async function fetchUpdateTest(TestId, testData, jwt, handlerResponse=()=>{}, notification) {
     try {
         const testDataJSON = JSON.stringify(testData)
         const response = await fetch(
@@ -87,14 +87,14 @@ async function fetchUpdateTest(TestId, testData, jwt, handlerResponse=()=>{}) {
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo actualizar el elemento")
+            notification("No se pudo actualizar el elemento")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
-async function fetchUpdateTestStats(TestId, testData, handlerResponse=()=>{}) {
+async function fetchUpdateTestStats(TestId, testData, handlerResponse=()=>{}, notification) {
     try {
         const testDataJSON = JSON.stringify(testData)
         const response = await fetch(
@@ -110,17 +110,17 @@ async function fetchUpdateTestStats(TestId, testData, handlerResponse=()=>{}) {
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("Error al actualizar las estadísticas")
+            notification("Error al actualizar las estadísticas")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
 
 //DELETE
 
-async function fetchDeleteTest(TestId, jwt, handlerResponse=()=>{}) {
+async function fetchDeleteTest(TestId, jwt, handlerResponse=()=>{}, notification) {
     try {
         const response = await fetch(
             baseUrl + pathAPIVersion + pathAPITest + TestId,
@@ -135,10 +135,10 @@ async function fetchDeleteTest(TestId, jwt, handlerResponse=()=>{}) {
         if (response.ok) {
             handlerResponse(response)
         } else {
-            alert("No se pudo borrar el elemento")
+            notification("No se pudo borrar el elemento")
         }
     } catch (exception) {
-        handlerExceptions(exception)
+        handlerExceptions(exception, notification)
     }
 };
 
