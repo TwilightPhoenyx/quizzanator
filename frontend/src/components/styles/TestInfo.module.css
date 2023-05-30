@@ -7,6 +7,13 @@ p {
     align-self: center;
 }
 
+input[type="image"] {
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 3rem;
+    margin: 0.1rem;
+}
+
 a:link {
     text-decoration: none;
 }

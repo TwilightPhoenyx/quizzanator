@@ -46,9 +46,41 @@ async function controllerLogin (request, response){
     } catch (exception) {
         return exceptionHandler(exception, response)
     }
-}
+};
+
+
+//GET
+
+async function controllerLoadUserData(request, response) {
+    try {
+        const user = await User.findOne({
+                attributes: ['profilePictureURL', 'username'],
+                where: {id: request.params.id}, 
+            })
+        response.status(200)
+        response.send(user.toJSON()) 
+    } catch (error) {
+        exceptionHandler(exception, response)
+    }
+};
+
+
+//PUT
+
+async function controllerUpdateUser(request, response) {
+    try {
+        const user = await User.findByPk(response.locals.authorization.id)
+        if ( ! user ) return response.status(404).send() //Si el valor esta vacio devolvemos excepcion
+        await user.update(request.body)
+        response.send("Ok!")
+    } catch (exception) {
+        exceptionHandler(exception, response)
+    }
+};
 
 export {
     controllerNewUser,
-    controllerLogin
+    controllerLogin,
+    controllerUpdateUser,
+    controllerLoadUserData
 }

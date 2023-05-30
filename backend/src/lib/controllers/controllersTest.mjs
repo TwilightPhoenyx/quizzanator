@@ -32,6 +32,20 @@ async function controllerLoadTests(request, response) {
         } catch (error) {
             exceptionHandler(exception, response)
         }
+    } else if (request.query.username) {
+        try {
+            const user = await User.findOne({
+                where: {username: request.query.username}
+            })
+            if ( ! user ) return response.status(404).send()
+            response.status(200)
+            response.json(await user.getTests(
+                {where: {isPublished: true}}
+                )
+            )
+        } catch (exception) {
+            exceptionHandler(exception, response)
+        }
     } else {
         try {
             response.status(200)

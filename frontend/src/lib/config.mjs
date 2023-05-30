@@ -8,6 +8,7 @@ const pathAPIAnswer = "/answer/"
 const pathAPIUser = "/user/"
 const pathAPISession = "/session/"
 const queryOptionalParamId = "?id="
+const queryOptionalParamUser = "?username="
 
 
 
@@ -19,5 +20,6 @@ export {
     pathAPIAnswer,
     pathAPIUser,
     pathAPISession,
-    queryOptionalParamId
+    queryOptionalParamId,
+    queryOptionalParamUser
 };

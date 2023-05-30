@@ -33,9 +33,9 @@ async function fetchNewTest(testData, jwt, handlerResponse=()=>{}, notification)
 
 //GET
 
-async function fetchLoadTests( optionalId, handlerResponse=()=>{}, notification) {
+async function fetchLoadTests( optionalId, optionalUser, handlerResponse=()=>{}, notification) {
     try {
-        const response = await fetch(baseUrl + pathAPIVersion + pathAPITest + optionalId)
+        const response = await fetch(baseUrl + pathAPIVersion + pathAPITest + optionalId + optionalUser)
         if (response.ok) {
             const data = await response.json()
             handlerResponse(data)

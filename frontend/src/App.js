@@ -62,7 +62,7 @@ function App() {
     };
       
     function loadData(){
-      fetchLoadTests("", setTests, setNotification);
+      fetchLoadTests("", "", setTests, setNotification);
     }; 
 
     return (

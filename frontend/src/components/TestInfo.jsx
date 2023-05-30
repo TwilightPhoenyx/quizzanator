@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../services/ContextComponent.jsx";
 
 import { fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
+import { fetchLoadUserData } from "../lib/fetch/fetchUser.mjs";
 
 import styles from "./styles/TestInfo.module.css"
 import thumbsUpIcon from "../img/thumbs-up-icon.png"
 import thumbsDownIcon from "../img/thumbs-down-icon.png"
+import defaultAvatar from "../img/icon-user-default.png"
 
 
 function TestInfo({loadData, testData, isPublic}){
@@ -18,25 +20,48 @@ function TestInfo({loadData, testData, isPublic}){
     const timesLiked = testData.numberOfLikes;
     const timesDisliked = testData.numberOfDislikes;
     const TestId = testData.id;
-    const UserId = testData.UserId;
+    const [userData, setUserData] = useState()
+    const [profilePictureURL, setProfilePictureURL] = useState(defaultAvatar)
+    const [username, setUsername] = useState("")
+    const [isNotFirstRender, setIsNotFirstRender] = useState(false)
 
     useEffect(
-        calculateLikePercentage,
+        ()=>{ 
+            setIsNotFirstRender(true)
+        },
         []
     );
 
+    useEffect(
+        ()=>{
+            calculateLikePercentage();
+            fetchLoadUserData(testData.UserId, setUserData, setNotification);
+        },
+        [isNotFirstRender]
+    );
+
+    useEffect(
+        ()=>{
+            if (userData) {
+                setUsername(userData.username)
+                setProfilePictureURL(userData.profilePictureURL);
+                console.log(userData.username)
+            }
+        },
+        [userData]
+    )
+
     function handlerClickDeleteTest(){
-        fetchDeleteTest(
-            TestId,
-            token,
-            handlerResponse,
-            setNotification
-        )
+        fetchDeleteTest(TestId, token, handlerResponse, setNotification)
     };
 
     function handlerClickEditTest(){
         navigate("/test_creation/"+ TestId)
-    }
+    };
+
+    function handlerGoToUserProfile(){
+        navigate("/user/" + username)
+    };
 
     function handlerResponse(_) {
         loadData()
@@ -61,6 +86,7 @@ function TestInfo({loadData, testData, isPublic}){
                 testData.isPublished === true ? styles.blueBackground : styles.grayBackground,
             ].join(" ")       
         }>
+            <input type="image" onClick={handlerGoToUserProfile} src={profilePictureURL ? profilePictureURL : defaultAvatar}/>
             {isPublic && 
                 <Link to={"/take_a_test/" + TestId + "/" + testData.title} >
                     <p className={
@@ -69,7 +95,7 @@ function TestInfo({loadData, testData, isPublic}){
                             styles.higlightListLinkHover
                         ].join(" ")
                     }>
-                        ⮞ {testData.title}
+                        {testData.title}
                     </p>
                 </Link>
             }

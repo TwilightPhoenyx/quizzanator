@@ -22,7 +22,9 @@ import {
 
 import { 
     controllerNewUser,
-    controllerLogin 
+    controllerLogin,
+    controllerUpdateUser,
+    controllerLoadUserData 
 } from "./lib/controllers/controllersUsers.mjs";
 
 import { middlewareAuthorization } from "./lib/controllers/middleware.mjs";
@@ -38,14 +40,16 @@ app.post(pathAPIVersion + "/test/:id/question/", middlewareAuthorization, contro
 app.post(pathAPIVersion + "/user/", controllerNewUser)
 app.post(pathAPIVersion + "/session/", controllerLogin)
 
-app.get(pathAPIVersion + "/test/", controllerLoadTests) /* /test/ o /test/?id=xx */
+app.get(pathAPIVersion + "/test/", controllerLoadTests) /* /?id=xx /?username=xxxx */
 app.get(pathAPIVersion + "/test/:id/question/",  controllerLoadQuestions)
 app.get(pathAPIVersion + "/question/:id/answer/", controllerLoadAnswers)
 app.get(pathAPIVersion + "/user/test/", middlewareAuthorization, controllerLoadUserTests)
+app.get(pathAPIVersion + "/user/:id", controllerLoadUserData)
 
 app.put(pathAPIVersion + "/test/:id/stats/", controllerUpdateTestStats)
 app.put(pathAPIVersion + "/test/:id", middlewareAuthorization, controllerUpdateTest)
 app.put(pathAPIVersion + "/question/:id", middlewareAuthorization, controllerUpdateQuestion)
+app.put(pathAPIVersion + "/user/", middlewareAuthorization, controllerUpdateUser)
 
 app.delete(pathAPIVersion + "/test/:id", middlewareAuthorization, controllerDeleteTest)
 app.delete(pathAPIVersion + "/question/:id", middlewareAuthorization, controllerDeleteQuestion)

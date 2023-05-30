@@ -97,7 +97,6 @@ function QuestionView() {
     function handlerResponse(_) {
         loadData()
         navigate("/test_creation/"+ TestId)
-
     };
 
     function handlerResponseLoadQuestion(response) {
