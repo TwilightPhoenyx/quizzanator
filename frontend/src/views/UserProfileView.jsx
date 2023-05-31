@@ -55,7 +55,11 @@ function UserProfileView(){
     return(
         <div className={styles.profileContainer}>
             <div className={styles.userDataContainer}>
-                <img className={styles.profilePicture} src={userData.profilePictureURL} alt="foto de perfil" />
+                <img 
+                    className={styles.profilePicture} 
+                    src={userData.profilePictureURL ? userData.profilePictureURL : defaultProfilePicture}
+                    alt="foto de perfil" 
+                />
                 <h1 className={styles.username}>{params.username}</h1>
             </div>
             {token && sessionName === params.username &&
