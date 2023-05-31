@@ -1,3 +1,4 @@
+import { Op } from "sequelize";
 import { hash, compare } from "bcrypt"
 import jwt from "jsonwebtoken"
 
@@ -55,7 +56,12 @@ async function controllerLoadUserData(request, response) {
     try {
         const user = await User.findOne({
                 attributes: ['profilePictureURL', 'username'],
-                where: {id: request.params.id}, 
+                where: {
+                    [Op.or]: [
+                        { id: request.params.iduser}, 
+                        { username: request.params.iduser}
+                    ]
+                }, 
             })
         response.status(200)
         response.send(user.toJSON()) 

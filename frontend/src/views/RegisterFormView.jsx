@@ -12,6 +12,7 @@ function RegisterFormView(){
     const { token, setNotification } = useContext(Context);
     const navigate = useNavigate();
 
+    const regExp = /[a-zA-Z]/g;
     const stateUsername = useState("");
     const [username, setUsername] = stateUsername;
     const statePassword = useState("");
@@ -23,16 +24,21 @@ function RegisterFormView(){
 
 
     function handlerClickSubmit(){
-        if (password === passwordConfirm) {
-            fetchNewUser (
-                { username, password, email},
-                handlerResponse,
-                setNotification
-            );
+        if(regExp.test(username)){
+            if (password === passwordConfirm) {
+                fetchNewUser (
+                    { username, password, email},
+                    handlerResponse,
+                    setNotification
+                );
+            } else {
+                setNotification("Confirme correctamente su contraseña")
+                setPassword("")
+                setPasswordConfirm("")
+            }
         } else {
-            setNotification("Confirme correctamente su contraseña")
-            setPassword("")
-            setPasswordConfirm("")
+            setNotification("El Nombre de Usuario debe contener al menos 1 letra")
+            setUsername("")
         }
     };
 

@@ -8,7 +8,11 @@ function UserTestList({loadUserTests, loadedTests, isPublic}){
             <ul>
             {loadedTests.map(
                 test=><li key={test.id}>
-                    <TestInfo loadData={loadUserTests} testData={test} isPublic={isPublic}/>
+                    <TestInfo 
+                        loadData={loadUserTests} 
+                        testData={test} 
+                        isPublic={isPublic}
+                        isInUserProfile={true}/>
                 </li>
                 )
             }

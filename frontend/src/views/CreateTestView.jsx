@@ -50,6 +50,7 @@ function CreateTestView() {
         } else if (!!TestId) {
             fetchLoadTests(
                 (queryOptionalParamId + TestId),
+                "",
                 handlerResponseLoadTest,
                 setNotification
             )
@@ -94,7 +95,6 @@ function CreateTestView() {
     function handlerResponseLoadTest(response) {
         setTitle (response.title)
         setIsPublished(response.isPublished)
-        console.log(response.isPublished)
         loadData()
     };
 

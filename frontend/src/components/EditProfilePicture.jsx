@@ -4,9 +4,9 @@ import { Context } from "../services/ContextComponent";
 
 import { fetchUpdateUser } from "../lib/fetch/fetchUser.mjs";
 
-function EditProfilePicture(){
+function EditProfilePicture({loadUser}){
 
-    const { token } = useContext(Context)
+    const { token, setNotification } = useContext(Context)
     const modalEditProfile = useRef()
     const [profilePictureURL, setProfilePictureURL] = useState("")
 
@@ -23,7 +23,7 @@ function EditProfilePicture(){
         if (image) aDataURL(image, setProfilePictureURL)
         else setProfilePictureURL("")
     }
-/*
+
     function handlerSubmitImage(event){
         fetchUpdateUser(
             { profilePictureURL },
@@ -34,16 +34,16 @@ function EditProfilePicture(){
     };
 
     function handlerResponse(_) {
-        loadData()
-        navigate("/test_creation/"+ TestId)
+        loadUser()
+        modalEditProfile.current.close()
     };
-*/
+
     return(
         <>
             <button onClick={handlerShowModal}>Editar perfil</button>
             <dialog ref={modalEditProfile}>
                 <input type="file" accept="image/jpeg, image/png" onInput={handlerAvatar}/>
-                <button>Subir imagen</button>
+                <button onClick={handlerSubmitImage}>Subir imagen</button>
                 <button onClick={handlerCloseModal}>Cerrar</button>
             </dialog>
         </>

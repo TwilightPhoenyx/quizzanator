@@ -32,7 +32,7 @@ import { middlewareAuthorization } from "./lib/controllers/middleware.mjs";
 
 const app = express()
 app.use(cors())
-app.use(express.json())
+app.use(express.json({ limit: '8Mb' }))
 
 
 app.post(pathAPIVersion + "/test/", middlewareAuthorization, controllerNewTest)
@@ -44,7 +44,7 @@ app.get(pathAPIVersion + "/test/", controllerLoadTests) /* /?id=xx /?username=xx
 app.get(pathAPIVersion + "/test/:id/question/",  controllerLoadQuestions)
 app.get(pathAPIVersion + "/question/:id/answer/", controllerLoadAnswers)
 app.get(pathAPIVersion + "/user/test/", middlewareAuthorization, controllerLoadUserTests)
-app.get(pathAPIVersion + "/user/:id", controllerLoadUserData)
+app.get(pathAPIVersion + "/user/:iduser", controllerLoadUserData)
 
 app.put(pathAPIVersion + "/test/:id/stats/", controllerUpdateTestStats)
 app.put(pathAPIVersion + "/test/:id", middlewareAuthorization, controllerUpdateTest)

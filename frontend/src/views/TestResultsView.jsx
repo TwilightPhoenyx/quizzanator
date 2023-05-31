@@ -27,7 +27,7 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
 
     useEffect(
         ()=>{
-            fetchLoadTests(queryOptionalParamId + TestId, handlerResponseLoadData, setNotification);
+            fetchLoadTests(queryOptionalParamId + TestId, "", handlerResponseLoadData, setNotification);
         },
         []
     );

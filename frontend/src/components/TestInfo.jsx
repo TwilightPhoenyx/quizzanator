@@ -11,7 +11,7 @@ import thumbsDownIcon from "../img/thumbs-down-icon.png"
 import defaultAvatar from "../img/icon-user-default.png"
 
 
-function TestInfo({loadData, testData, isPublic}){
+function TestInfo({loadData, testData, isPublic, isInUserProfile}){
 
     const { token, setNotification } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
     const navigate = useNavigate();
@@ -45,7 +45,6 @@ function TestInfo({loadData, testData, isPublic}){
             if (userData) {
                 setUsername(userData.username)
                 setProfilePictureURL(userData.profilePictureURL);
-                console.log(userData.username)
             }
         },
         [userData]
@@ -86,7 +85,14 @@ function TestInfo({loadData, testData, isPublic}){
                 testData.isPublished === true ? styles.blueBackground : styles.grayBackground,
             ].join(" ")       
         }>
-            <input type="image" onClick={handlerGoToUserProfile} src={profilePictureURL ? profilePictureURL : defaultAvatar}/>
+            {isInUserProfile === false &&
+                <input 
+                    type="image"
+                    className={styles.userAvatar} 
+                    onClick={handlerGoToUserProfile} 
+                    src={profilePictureURL ? profilePictureURL : defaultAvatar}
+                />
+            }
             {isPublic && 
                 <Link to={"/take_a_test/" + TestId + "/" + testData.title} >
                     <p className={

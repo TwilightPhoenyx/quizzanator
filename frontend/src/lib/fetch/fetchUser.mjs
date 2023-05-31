@@ -64,10 +64,10 @@ async function fetchNewSession(userData, handlerResponse=()=>{}, notification) {
 
 //GET
 
-async function fetchLoadUserData(userId, handlerResponse=()=>{}, notification) {
+async function fetchLoadUserData(userIdentifier, handlerResponse=()=>{}, notification) {
     try {
         const response = await fetch(
-            baseUrl + pathAPIVersion + pathAPIUser + userId,
+            baseUrl + pathAPIVersion + pathAPIUser + userIdentifier,
             )
         if (response.ok) {
             const data = await response.json()

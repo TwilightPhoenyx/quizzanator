@@ -7,13 +7,6 @@ p {
     align-self: center;
 }
 
-input[type="image"] {
-    width: 2.7rem;
-    height: 2.7rem;
-    border-radius: 3rem;
-    margin: 0.1rem;
-}
-
 a:link {
     text-decoration: none;
 }
@@ -37,6 +30,13 @@ a:link {
     flex-direction: row;
     justify-self: flex-end;
     align-items: center;
+}
+
+.userAvatar {
+    width: 2.7rem;
+    height: 2.7rem;
+    border-radius: 3rem;
+    margin: 0.1rem;
 }
 
 .testTitleDisplay {
