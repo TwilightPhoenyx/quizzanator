@@ -52,7 +52,6 @@ async function fetchNewSession(userData, handlerResponse=()=>{}, notification) {
             const token = await response.text()
             handlerResponse(token)
         } else {
-            console.log(response)
             notification("No se pudo iniciar sesión. Compruebe los datos")
         }
     } catch (exception) {

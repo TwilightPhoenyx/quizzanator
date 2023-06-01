@@ -88,6 +88,7 @@ function TestInfo({loadData, testData, isPublic, isInUserProfile}){
             {isInUserProfile === false &&
                 <input 
                     type="image"
+                    title={username}
                     className={styles.userAvatar} 
                     onClick={handlerGoToUserProfile} 
                     src={profilePictureURL ? profilePictureURL : defaultAvatar}

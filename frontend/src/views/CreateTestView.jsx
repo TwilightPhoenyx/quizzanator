@@ -84,7 +84,6 @@ function CreateTestView() {
 
     function handlerClickIsPublished(){
         setIsPublished(!isPublished)
-        console.log(isPublished)
     }
 
     function handlerGoToCreateQuestion(){

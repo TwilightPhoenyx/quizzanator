@@ -83,6 +83,21 @@ input[type=number] {
     } 
 }
 
+dialog {
+    background-color: rgb(64, 117, 167);
+    color: rgb(20, 20, 88);
+}
+
+dialog div {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+dialog::backdrop {
+    background-color: rgba(17, 17, 39, 0.671);
+}
+
 .session-name {
     font-style: italic;
     font-size: 1.2rem;

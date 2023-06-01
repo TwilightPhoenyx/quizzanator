@@ -67,7 +67,7 @@ function UserProfileView(){
                     <button className={styles.resetMargins} onClick={handlerClickCreateTest}>
                         Crea test nuevo
                     </button>
-                    <EditProfilePicture loadUser={loadUser}/>
+                    <EditProfilePicture loadUser={loadUser} profilePicture={userData.profilePictureURL}/>
                 </div>
             }
             <UserTestList loadUserTests={loadTests} loadedTests={tests}  isPublic={isPublic}/>

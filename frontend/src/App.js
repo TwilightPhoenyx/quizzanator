@@ -73,7 +73,7 @@ function App() {
           {(token === "") && <p className="session-name">Hola, invitad@</p>}
           {token && 
               <Link to={"/user/" + sessionName}>
-                <p className="session-name">Hola, {sessionName}</p>
+                <p className="session-name link">Hola, {sessionName}</p>
               </Link>}
           <button onClick={handlerReturnToMainMenu}>Volver a inicio</button>
         </nav>
@@ -142,8 +142,10 @@ function App() {
           </ContextComponent>
 
           <dialog ref={notificationModal} id="modal">
-                <span>{notification}</span>
+              <div>
+                <p>{notification}</p>
                 <button onClick={handlerClickCloseModal}>Aceptar</button>
+              </div>
           </dialog>
 
         </main>

@@ -1,16 +1,21 @@
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { aDataURL } from "../lib/fileManagement.mjs";
 import { Context } from "../services/ContextComponent";
+import defaultProfilePicture from "../img/icon-user-default.png"
 
 import { fetchUpdateUser } from "../lib/fetch/fetchUser.mjs";
 
-function EditProfilePicture({loadUser}){
+import styles from "./styles/EditProfilePicture.module.css"
+
+
+function EditProfilePicture({loadUser, profilePicture}){
 
     const { token, setNotification } = useContext(Context)
     const modalEditProfile = useRef()
-    const [profilePictureURL, setProfilePictureURL] = useState("")
+    const [profilePictureURL, setProfilePictureURL] = useState(profilePicture)
 
     function handlerShowModal(){
+        setProfilePictureURL(profilePicture)
         modalEditProfile.current.showModal()
     }
 
@@ -41,10 +46,22 @@ function EditProfilePicture({loadUser}){
     return(
         <>
             <button onClick={handlerShowModal}>Editar perfil</button>
-            <dialog ref={modalEditProfile}>
-                <input type="file" accept="image/jpeg, image/png" onInput={handlerAvatar}/>
-                <button onClick={handlerSubmitImage}>Subir imagen</button>
-                <button onClick={handlerCloseModal}>Cerrar</button>
+            <dialog  ref={modalEditProfile}>
+                <div className={styles.editProfileContainer}>
+                    <img 
+                        className={styles.avatarPreview}
+                        src={profilePictureURL ? profilePictureURL : defaultProfilePicture}
+                        alt="foto de perfil" 
+                    />
+                    <input 
+                        type="file" 
+                        className={styles.buttonSelectImg} 
+                        accept="image/jpeg, image/png" 
+                        onInput={handlerAvatar}
+                    />
+                    <button onClick={handlerSubmitImage}>Subir imagen</button>
+                    <button onClick={handlerCloseModal}>Cerrar</button>
+                </div>
             </dialog>
         </>
     );
