@@ -113,8 +113,12 @@ function TestInfo({loadData, testData, isPublic, isInUserProfile}){
             }
             <span className={styles.listElementData}>
                 <span>
-                    <p className={styles.scoreDisplay}>🗲{testData.averageScore}%</p>
-                    {/*<p className={styles.smallText}>de {testData.timesCompleted}</p>*/}
+                    <p 
+                        title={"De " + testData.timesCompleted + " usuarios"} 
+                        className={styles.scoreDisplay}
+                    >
+                        🗲{testData.averageScore}%
+                    </p>
                 </span>
                 <span className={styles.likesDisplay}>
                     <img 
