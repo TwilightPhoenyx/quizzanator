@@ -12,6 +12,7 @@ function InputText ({stateValue, id, type, maxLength, placeholder}){
             onInput={handlerInputText} 
             type={type} 
             value={value}
+            title={value}
             placeholder={placeholder}
         />
     );
