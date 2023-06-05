@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
+import { Context } from "../services/ContextComponent.jsx";
 
 import { fetchDeleteQuestion } from "../lib/fetch/fetchQuestion.mjs";
 
 import styles from "./styles/QuestionInfo.module.css"
+import { useContext } from "react";
 
 function QuestionInfo({TestId, questionData, loadTest}){
 
     const navigate = useNavigate();
+    const { token, setNotification } = useContext(Context)
 
 
     function handlerClickEditQuestion() {
@@ -16,7 +19,9 @@ function QuestionInfo({TestId, questionData, loadTest}){
     function handlerClickDeleteQuestion(){
         fetchDeleteQuestion(
             questionData.id,
-            handlerResponse
+            token,
+            handlerResponse,
+            setNotification
         )
     };
 

@@ -23,3 +23,29 @@ ol {
     border-radius: 0.4rem;
     margin-left: 0.8rem;
 }
+
+.buttonContainer{
+    width: 50.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.checkboxLabel {
+    color:lightblue;
+    border-radius: 1rem;
+    width: 8rem;
+    padding-bottom: 0rem;
+    padding-top: 0.1rem;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.greenBackground {
+    background-color: rgb(69, 145, 69);
+}
+
+.darkBlueBackground{
+    background-color: rgba(45, 65, 119, 0.637);
+}

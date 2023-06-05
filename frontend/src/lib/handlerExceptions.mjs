@@ -1,6 +1,6 @@
-function handlerExceptions(exception) {
+function handlerExceptions(exception, notification) {
     console.error(exception)
-    alert(exception)
+    notification(exception)
 }
 
 export default handlerExceptions

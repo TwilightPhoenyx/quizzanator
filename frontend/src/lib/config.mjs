@@ -5,7 +5,10 @@ const pathAPIVersion = "/api/v1.0"
 const pathAPITest = "/test/"
 const pathAPIQuestion = "/question/"
 const pathAPIAnswer = "/answer/"
+const pathAPIUser = "/user/"
+const pathAPISession = "/session/"
 const queryOptionalParamId = "?id="
+const queryOptionalParamUser = "?username="
 
 
 
@@ -15,5 +18,8 @@ export {
     pathAPITest,
     pathAPIQuestion,
     pathAPIAnswer,
-    queryOptionalParamId
-}
+    pathAPIUser,
+    pathAPISession,
+    queryOptionalParamId,
+    queryOptionalParamUser
+};

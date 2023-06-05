@@ -1,0 +1,26 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: flex-start;
+}
+
+form fieldset{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-color: rgba(19, 25, 97, 0.822);
+    border-width: 0.2rem;
+    padding: 2rem;
+}
+
+form fieldset legend{
+    font-size: 1.1rem;
+    padding: 0.1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: lightblue;
+    text-align: center;
+    background-color: rgba(19, 25, 97, 0.822);
+    border-radius: 3rem;
+}

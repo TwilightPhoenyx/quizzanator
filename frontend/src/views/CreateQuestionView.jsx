@@ -13,7 +13,7 @@ import styles from "./styles/CreateQuestionView.module.css"
 
 function QuestionView() {
 
-    const { loadData } = useContext(Context);
+    const { loadData, token, setNotification } = useContext(Context);
     const navigate = useNavigate();
     const params = useParams();
     const TestId = params.testId
@@ -46,7 +46,8 @@ function QuestionView() {
                 fetchLoadQuestion(
                     (queryOptionalParamId + QuestionId),
                     TestId,
-                    handlerResponseLoadQuestion
+                    handlerResponseLoadQuestion,
+                    setNotification
                 )
             } else if (!QuestionId) {
                 setRenderAnswers(true)
@@ -78,13 +79,17 @@ function QuestionView() {
             fetchNewQuestion(
                 TestId,
                 { questionText, timer, numberOfAnswers, answers },
-                handlerResponse
+                token,
+                handlerResponse,
+                setNotification
             )
         } else {
             fetchUpdateQuestion(
                 QuestionId,
                 { questionText, timer, numberOfAnswers, TestId, answers },
-                handlerResponse
+                token,
+                handlerResponse,
+                setNotification
             )
         }
     };
@@ -92,14 +97,13 @@ function QuestionView() {
     function handlerResponse(_) {
         loadData()
         navigate("/test_creation/"+ TestId)
-
     };
 
     function handlerResponseLoadQuestion(response) {
         setTimer(response.timer)
         setNumberOfAnswers(response.numberOfAnswers)
         setQuestionText(response.questionText)
-        fetchLoadAnswers(QuestionId, handlerLoadAnswers)
+        fetchLoadAnswers(QuestionId, handlerLoadAnswers, setNotification)
     };
 
     function handlerLoadAnswers(data){
@@ -116,7 +120,7 @@ function QuestionView() {
         <div className={styles.questionContainer}>
             <div className={styles.bigText}>
                 <label>✎</label>
-                <InputText stateValue={stateQuestion} maxLength="100"/>
+                <InputText stateValue={stateQuestion} type="text" maxLength="100"/>
             </div>
             <div className={styles.inputNumberContainer}>
                 <InputNumber 

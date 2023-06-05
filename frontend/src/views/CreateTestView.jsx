@@ -2,7 +2,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
-import { fetchNewTest, fetchLoadTests, fetchUpdateTest, fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
+import { fetchNewTest, fetchLoadTests, fetchUpdateTest } from "../lib/fetch/fetchTest.mjs";
 import { fetchLoadQuestion } from "../lib/fetch/fetchQuestion.mjs";
 import { queryOptionalParamId } from "../lib/config.mjs";
 
@@ -14,7 +14,7 @@ import QuestionInfo from "../components/QuestionInfo.jsx";
 
 function CreateTestView() {
 
-    const { loadData } = useContext(Context)
+    const { loadData, token, sessionName, setNotification } = useContext(Context)
     const navigate = useNavigate();
     const params = useParams();
     const stateTitle = useState("Nuevo Test");
@@ -22,6 +22,7 @@ function CreateTestView() {
     const [TestId, setTestId] = useState(params.testId)
     const [isNotFirstRender, setIsNotFirstRender] = useState(false);
     const [title, setTitle] = stateTitle;
+    const [isPublished, setIsPublished] = useState(false)
     const [questions, setQuestions] = useState([]);
 
     useEffect(
@@ -42,34 +43,48 @@ function CreateTestView() {
         if (!TestId && isNotFirstRender === true) {
             fetchNewTest(
                 { title },
-                handlerResponseNewTest
+                token,
+                handlerResponseNewTest,
+                setNotification
             )
         } else if (!!TestId) {
             fetchLoadTests(
                 (queryOptionalParamId + TestId),
-                handlerResponseLoadTest
+                "",
+                handlerResponseLoadTest,
+                setNotification
             )
-            fetchLoadQuestion("", TestId, setQuestions)
+            fetchLoadQuestion("", TestId, setQuestions, setNotification)
         }
     };
 
     function updateTest(){
         fetchUpdateTest(
             TestId,
-            { title },
-            handlerResponse
+            { title, isPublished },
+            token,
+            handlerResponse,
+            setNotification
         )
     };
 
     function handlerClickSumbmit(){
         if (title === "") {
-            alert("Pon un título a tu test")
+            setNotification("Pon un título a tu test")
         } else {
             updateTest()
             setTitle(null)
-            navigate("/test_list/")
+            navigate("/user/" + sessionName)
         }
     };
+
+    function handlerClickCancel(){
+        navigate("/user/" + sessionName)
+    };
+
+    function handlerClickIsPublished(){
+        setIsPublished(!isPublished)
+    }
 
     function handlerGoToCreateQuestion(){
         updateTest()
@@ -78,21 +93,13 @@ function CreateTestView() {
 
     function handlerResponseLoadTest(response) {
         setTitle (response.title)
+        setIsPublished(response.isPublished)
         loadData()
     };
 
     function handlerResponseNewTest(response) {
         setTestId (response.id)
         loadData()
-    };
-
-    function handlerClickCancel(){
-        /*fetchDeleteTest(
-            TestId,
-            handlerResponse
-        )
-        navigate("/")*/
-        navigate("/test_list/")
     };
 
     function handlerResponse(_){
@@ -104,7 +111,7 @@ function CreateTestView() {
             <div>
                 <div className={styles.bigText}>
                     <label>✎</label>
-                    <InputText stateValue={stateTitle} maxLength="80"/>
+                    <InputText stateValue={stateTitle} type="text" maxLength="80"/>
                 </div>
                 <button className={styles.additionButton} onClick={handlerGoToCreateQuestion}>
                    Nueva Pregunta
@@ -117,10 +124,24 @@ function CreateTestView() {
                         )
                     }
                 </ol>
-
             </div>
-            <button onClick={handlerClickSumbmit}>Subir</button>
-            <button onClick={handlerClickCancel}>Cancelar</button>
+            <div className={styles.buttonContainer}>
+                <div>
+                    <button onClick={handlerClickSumbmit}>Guardar</button>
+                    <button onClick={handlerClickCancel}>Cancelar</button>
+                </div>
+                <label
+                    className={
+                        [
+                            styles.checkboxLabel,
+                            isPublished === true ? styles.greenBackground : styles.darkBlueBackground,
+                        ].join(" ")  
+                    }
+                >
+                    <input type="checkbox" onChange={handlerClickIsPublished} checked={isPublished}/>
+                    <span> Publicado</span>
+                </label>
+            </div>
         </>
     )
 };

@@ -3,37 +3,64 @@ import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../services/ContextComponent.jsx";
 
 import { fetchDeleteTest } from "../lib/fetch/fetchTest.mjs";
+import { fetchLoadUserData } from "../lib/fetch/fetchUser.mjs";
 
 import styles from "./styles/TestInfo.module.css"
 import thumbsUpIcon from "../img/thumbs-up-icon.png"
 import thumbsDownIcon from "../img/thumbs-down-icon.png"
+import defaultAvatar from "../img/icon-user-default.png"
 
 
-function TestInfo({testData}){
+function TestInfo({loadData, testData, isPublic, isInUserProfile}){
 
-    const { loadData } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
+    const { token, setNotification } = useContext(Context); //Tomamos el sólo loadData del objeto guadrado en Context
     const navigate = useNavigate();
 
     const [likePercentage, setLikePercentage] = useState();
     const timesLiked = testData.numberOfLikes;
     const timesDisliked = testData.numberOfDislikes;
     const TestId = testData.id;
+    const [userData, setUserData] = useState()
+    const [profilePictureURL, setProfilePictureURL] = useState(defaultAvatar)
+    const [username, setUsername] = useState("")
+    const [isNotFirstRender, setIsNotFirstRender] = useState(false)
 
     useEffect(
-        calculateLikePercentage,
+        ()=>{ 
+            setIsNotFirstRender(true)
+        },
         []
     );
 
+    useEffect(
+        ()=>{
+            calculateLikePercentage();
+            fetchLoadUserData(testData.UserId, setUserData, setNotification);
+        },
+        [isNotFirstRender]
+    );
+
+    useEffect(
+        ()=>{
+            if (userData) {
+                setUsername(userData.username)
+                setProfilePictureURL(userData.profilePictureURL);
+            }
+        },
+        [userData]
+    )
+
     function handlerClickDeleteTest(){
-        fetchDeleteTest(
-            TestId,
-            handlerResponse
-        )
+        fetchDeleteTest(TestId, token, handlerResponse, setNotification)
     };
 
     function handlerClickEditTest(){
         navigate("/test_creation/"+ TestId)
-    }
+    };
+
+    function handlerGoToUserProfile(){
+        navigate("/user/" + username)
+    };
 
     function handlerResponse(_) {
         loadData()
@@ -52,16 +79,46 @@ function TestInfo({testData}){
     };
 
     return(
-        <span className={styles.testListElement}>
-            <Link to={"/take_a_test/" + TestId + "/" + testData.title} >
+        <span className={
+            [
+                styles.listElementContainer,
+                testData.isPublished === true ? styles.blueBackground : styles.grayBackground,
+            ].join(" ")       
+        }>
+            {isInUserProfile === false &&
+                <input 
+                    type="image"
+                    title={username}
+                    className={styles.userAvatar} 
+                    onClick={handlerGoToUserProfile} 
+                    src={profilePictureURL ? profilePictureURL : defaultAvatar}
+                />
+            }
+            {isPublic && 
+                <Link to={"/take_a_test/" + TestId + "/" + testData.title} >
+                    <p className={
+                        [
+                            styles.testTitleDisplay,
+                            styles.higlightListLinkHover
+                        ].join(" ")
+                    }>
+                        {testData.title}
+                    </p>
+                </Link>
+            }
+            {isPublic === false && 
                 <p className={styles.testTitleDisplay}>
-                    ⮞ {testData.title}
+                        {testData.title}
                 </p>
-            </Link>
+            }
             <span className={styles.listElementData}>
                 <span>
-                    <p className={styles.scoreDisplay}>🗲{testData.averageScore}%</p>
-                    {/*<p className={styles.smallText}>de {testData.timesCompleted}</p>*/}
+                    <p 
+                        title={"De " + testData.timesCompleted + " usuarios"} 
+                        className={styles.scoreDisplay}
+                    >
+                        🗲{testData.averageScore}%
+                    </p>
                 </span>
                 <span className={styles.likesDisplay}>
                     <img 
@@ -71,8 +128,8 @@ function TestInfo({testData}){
                     />
                     {likePercentage}%
                 </span>
-                <button className="mini-button" onClick={handlerClickEditTest}>✎</button>
-                <button className="mini-button" onClick={handlerClickDeleteTest}>✘</button>
+                {isPublic === false && <button className="mini-button" onClick={handlerClickEditTest}>✎</button>}
+                {isPublic === false && <button className="mini-button" onClick={handlerClickDeleteTest}>✘</button>}
             </span>
         </span>
     )

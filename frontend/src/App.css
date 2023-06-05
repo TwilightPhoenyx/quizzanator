@@ -83,6 +83,39 @@ input[type=number] {
     } 
 }
 
+dialog {
+    background-color: rgb(64, 117, 167);
+    color: rgb(20, 20, 88);
+}
+
+dialog div {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+dialog::backdrop {
+    background-color: rgba(17, 17, 39, 0.671);
+}
+
+.session-name {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgb(33, 33, 173);
+}
+
+.link {
+    color: rgb(44, 44, 148);
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 1rem;
+    &:hover {
+        border-radius: 3rem;
+        text-shadow: 2px 0 #a8defd, -2px 0 #a8defd, 0 2px #a8defd, 0 -2px #a8defd,
+                   1px 1px #a8defd, -1px -1px #a8defd, 1px -1px #a8defd, -1px 1px #a8defd;
+    }
+}
+
 .mini-button {
     border-style: none;
     background-color: red;
@@ -103,4 +136,33 @@ input[type=number] {
     }
     
 }
+
+#username, #password, #password-confirmation, #email {
+    all: unset;
+    background-color: white;
+    font-size: 1rem;
+    border-style: inset;
+    width: 20rem;
+    margin: 0.5rem;
+    display: block;
+    text-align: left;
+}
     
+::-webkit-scrollbar {
+    width: 1rem;
+}
+  
+::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px rgb(50, 32, 148); 
+    border-radius: 1rem;
+}
+   
+::-webkit-scrollbar-thumb {
+    background: rgb(32, 32, 138); 
+    border-radius: 1rem;
+    height: 1rem;
+}
+  
+::-webkit-scrollbar-thumb:hover {
+    background: rgb(20, 20, 88); 
+}

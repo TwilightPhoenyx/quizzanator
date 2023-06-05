@@ -1,5 +1,5 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
-import { useState, useEffect } from "react";
+import { Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useRef } from "react";
 import { ContextComponent } from './services/ContextComponent.jsx';
 
 import { fetchLoadTests } from "./lib/fetch/fetchTest.mjs";
@@ -9,6 +9,9 @@ import CreateTestView from "./views/CreateTestView.jsx";
 import TestListView from "./views/TestListView.jsx";
 import CreateQuestionView from './views/CreateQuestionView.jsx';
 import TakeTestView from './views/TakeTestView.jsx';
+import LoginFormView from './views/LoginFormView.jsx';
+import RegisterFormView from './views/RegisterFormView.jsx';
+import UserProfileView from './views/UserProfileView.jsx';
 
 import "./App.css"
 
@@ -17,34 +20,72 @@ function App() {
     const navigate = useNavigate();
 
     const [tests, setTests] = useState([]);
+    const [token, setToken] = useState("");
+    const defalultSessionName = "invitad@";
+    const [sessionName, setSessionName] = useState(defalultSessionName)
+    const notificationModal = useRef()
+    let [notification, setNotification] = useState("");
+
+    useEffect(
+          ()=>{
+            if (notification === "") {
+              notificationModal.current.close()
+            } else {
+              notificationModal.current.showModal()
+            }
+          },
+      [notification]
+    );
 
     useEffect(
             loadData,
         []
     );
 
-    function handlerGoToCreateTest(){
-      navigate("/test_creation/");
-    };
 
     function handlerReturnToMainMenu(){
       navigate("/");
     };
+
+    function handlerGoToLogIn(){
+      navigate("/login/");
+    };
+
+    function handlerClickLogOut(){
+      setToken("")
+      setSessionName(defalultSessionName)
+      navigate("/")
+    };
+
+    function handlerClickCloseModal(){
+      setNotification("")
+    };
       
     function loadData(){
-      fetchLoadTests("", setTests);
+      fetchLoadTests("", "", setTests, setNotification);
     }; 
 
     return (
       <>
         <nav>
-            <button onClick={handlerGoToCreateTest}>¡Crea tu test!</button>
-            <button onClick={handlerReturnToMainMenu}>Volver a inicio</button>
+          {(token === "") && <button onClick={handlerGoToLogIn}>Inicia Sesión</button>}
+          {token && <button onClick={handlerClickLogOut}>Cerrar Sesión</button>}
+          {(token === "") && <p className="session-name">Hola, invitad@</p>}
+          {token && 
+              <Link to={"/user/" + sessionName}>
+                <p className="session-name link">Hola, {sessionName}</p>
+              </Link>}
+          <button onClick={handlerReturnToMainMenu}>Volver a inicio</button>
         </nav>
         <main>
           <ContextComponent contextValue={
               {
-                loadData
+                loadData,
+                token,
+                setToken,
+                sessionName,
+                setSessionName,
+                setNotification
               }
             }
             > 
@@ -61,7 +102,7 @@ function App() {
                   <CreateTestView/>
                 }
               />
-                <Route 
+              <Route 
                 path='/test_creation/:testId/question_creation/:questionId?' 
                 element={
                   <CreateQuestionView/>
@@ -79,8 +120,34 @@ function App() {
                   <TakeTestView/>
                 }
               />
+              <Route 
+                path='/login/' 
+                element={
+                  <LoginFormView/>
+                }
+              />
+              <Route 
+                path='/sign_up/' 
+                element={
+                  <RegisterFormView/>
+                }
+              />
+              <Route 
+                path='/user/:username' 
+                element={
+                  <UserProfileView/>
+                }
+              />
             </Routes>
           </ContextComponent>
+
+          <dialog ref={notificationModal} id="modal">
+              <div>
+                <p>{notification}</p>
+                <button onClick={handlerClickCloseModal}>Aceptar</button>
+              </div>
+          </dialog>
+
         </main>
         <footer>
           <p>©️ Copyright 2023. </p>

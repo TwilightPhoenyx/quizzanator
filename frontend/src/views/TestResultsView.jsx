@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { Context } from "../services/ContextComponent.jsx";
 
-import { fetchLoadTests, fetchUpdateTest } from "../lib/fetch/fetchTest.mjs";
+import { fetchLoadTests, fetchUpdateTestStats } from "../lib/fetch/fetchTest.mjs";
 import { queryOptionalParamId } from "../lib/config.mjs";
 
 import styles from "./styles/TestResultView.module.css"
@@ -12,7 +12,7 @@ import thumbsDownIcon from "../img/thumbs-down-icon.png"
 
 function TestResultsView({TestId, correctAnswers, answerIndex}){
 
-    const { loadData } = useContext(Context)
+    const { loadData, setNotification } = useContext(Context)
     const navigate = useNavigate()
     const numberOfQuestions = answerIndex +1;
     const percentageScore = ((correctAnswers/numberOfQuestions)*100);
@@ -27,7 +27,7 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
 
     useEffect(
         ()=>{
-            fetchLoadTests(queryOptionalParamId + TestId, handlerResponseLoadData);
+            fetchLoadTests(queryOptionalParamId + TestId, "", handlerResponseLoadData, setNotification);
         },
         []
     );
@@ -72,10 +72,11 @@ function TestResultsView({TestId, correctAnswers, answerIndex}){
     };
 
     function handlerClickReturnToList(){
-        fetchUpdateTest(
+        fetchUpdateTestStats(
             TestId,
             { numberOfLikes, numberOfDislikes, timesCompleted, averageScore },
-            handlerResponse
+            handlerResponse,
+            setNotification
         )
     };
 

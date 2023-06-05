@@ -1,4 +1,4 @@
-function InputText ({stateValue, maxLength}){
+function InputText ({stateValue, id, type, maxLength, placeholder}){
     const [value, setValue] = stateValue
 
     function handlerInputText(event){
@@ -6,7 +6,15 @@ function InputText ({stateValue, maxLength}){
     };
 
     return(
-        <input maxLength={maxLength} onInput={handlerInputText} type="text" value={value}/>
+        <input 
+            id={id} 
+            maxLength={maxLength} 
+            onInput={handlerInputText} 
+            type={type} 
+            value={value}
+            title={value}
+            placeholder={placeholder}
+        />
     );
 
 };
