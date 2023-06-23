@@ -1,9 +1,13 @@
 import { Sequelize, DataTypes }  from 'sequelize';
 
-const db = new Sequelize({
-    dialect: 'sqlite',
-    storage: './db/quizzanator-database.sqlite'
-});
+const db = new Sequelize(
+    process.env.NODE_ENV === "production"
+    ? process.env.DB_URL
+    :{
+        dialect: 'sqlite',
+        storage: './db/quizzanator-database.sqlite'
+    }
+);
 
 const User = db.define('User', {
     username: {

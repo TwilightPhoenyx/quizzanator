@@ -1,4 +1,6 @@
-const baseUrl = window.location.hostname === "localhost" ? "http://localhost:8000" : ""
+const baseUrl = ["localhost", "127.0.0.1"].includes(window.location.hostname) 
+    ? "http://localhost:8000" 
+    : ""
 
 const pathAPIVersion = "/api/v1.0"
 

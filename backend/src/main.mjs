@@ -31,7 +31,13 @@ import { middlewareAuthorization } from "./lib/controllers/middleware.mjs";
 
 
 const app = express()
-app.use(cors())
+app.use(
+    cors({
+        origin: process.env.CORS_ORIGIN ?? "*",
+        preflightContinue: false,
+        optionsSuccessStatus: 204
+    })
+)
 app.use(express.json({ limit: '8Mb' }))
 
 
